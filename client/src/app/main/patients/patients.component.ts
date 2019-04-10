@@ -16,10 +16,10 @@ import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 })
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
-    selected:boolean;
+    allSelected:boolean;
 
 
-    public patients: Observable<IPatientStatus[]>;
+    public patients$: Observable<IPatientStatus[]>;
 
     displayedColumns = ['id', 'בחר', 'Assignment', 'department', 'gender', 'returningPatient', 'previousReleasingDepartment', 'totalTimeInMelrad',
         'waitingTime', 'givenArtificialRespiration', 'nursingComplexityIndependentPatient',
@@ -27,10 +27,11 @@ export class PatientsComponent implements OnInit {
         'isolationResistant', 'isolationType', 'neutropeticPatient'];
 
     constructor(private patientsStatusService: PatientsStatusService,private dialog:MatDialog) {
+        this.allSelected = false;
     }
 
     ngOnInit(): void {
-        this.patients = this.patientsStatusService.getPatients().pipe(
+        this.patients$ = this.patientsStatusService.getPatients().pipe(
             map(patients => {
                     for (let patient of patients) {
                         patient.selected = false;
@@ -41,8 +42,8 @@ export class PatientsComponent implements OnInit {
         );
     }
 
-    changeSelection(row): boolean {
-        return row.selected = !row.selected;
+    changeSelection(cg: any , row): boolean {
+        return row.selected = cg.value;
     }
     openDialog() {
         const dialogRef = this.dialog.open(DialogComponent);
@@ -50,6 +51,18 @@ export class PatientsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
+    }
+    selectAll(patients) {
+        if(this.allSelected) {
+            this.allSelected = true;
+        }
+        for (let patient of patients) {
+            patient.selected = this.allSelected;
+        }
+
+
+
+
     }
 }
 

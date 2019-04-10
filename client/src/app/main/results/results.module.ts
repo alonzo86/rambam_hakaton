@@ -7,6 +7,7 @@ import { MatButtonModule, MatIconModule, MatTabsModule, MatRippleModule, MatSlid
 import { ResultsComponent } from './results.component';
 import { ResultsService } from './results.service';
 import { RecommendationComponent } from './recommendation/recommendation.component';
+import {DepartmentsComponent} from "./departments/departments.component";
 
 const routes = [
     {
@@ -16,7 +17,7 @@ const routes = [
 ];
 
 @NgModule({
-    declarations: [ResultsComponent, RecommendationComponent],
+    declarations: [ResultsComponent, RecommendationComponent,DepartmentsComponent],
     imports: [
         RouterModule.forChild(routes),
         TranslateModule,
