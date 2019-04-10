@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
 
 @Data
 @Entity
@@ -14,8 +13,23 @@ import javax.persistence.GeneratedValue;
 @AllArgsConstructor
 public class Department {
     @Id
-	@GeneratedValue
     private long id;
     private String name;
-    private int currentAdmissions;
+    private int totalBedCount;
+    private int emergencyBedCount;
+    private int isolationRoomsCount;
+    private int hallwayBedCount;
+    private int currentPatientCount;
+    private int emergencyPatientCount;
+    private int respirationPatientCount;
+    private int nursingPatientCount;
+    private int independentPatientCount;
+    private int oxygenSupportPatientCount;
+    private int monitoredPatientCount;
+    private int isolationPatientCount;
+    private String isolationType;
+    private int canceledBedType;
+    private int neutrophillPatientCount;
+    private int actualHallwayPatientCount;
+    private int patientAcceptedLast24Hours;
 }
