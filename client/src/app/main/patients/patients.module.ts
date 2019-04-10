@@ -10,7 +10,7 @@ import {
     MatRippleModule,
     MatSlideToggleModule,
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule, MatDialogModule
 } from '@angular/material';
 import {PatientsStatusService} from './patients.service';
 import {PatientsComponent} from './patients.component';
@@ -34,6 +34,7 @@ const routes = [
         MatTableModule,
         MatTabsModule,
         MatCheckboxModule,
+        MatDialogModule,
         FuseSharedModule
     ],
     providers: [PatientsStatusService],
