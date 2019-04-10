@@ -1,5 +1,2 @@
-id,name,currentAdmissions
-1,rrrrr,4
-2,ttttt,8
-3,nnnnn,1
-4,mmmmm,100
+id,name,totalBedCount,emergencyBedCount,isolationRoomsCount,hallwayBedCount,currentPatientCount,emergencyPatientCount,respirationPatientCount,nursingPatientCount,independentPatientCount,oxygenSupportPatientCount,monitoredPatientCount,isolationPatientCount,isolationType,canceledBedType,neutrophillPatientCount,actualHallwayPatientCount,patientAcceptedLast24Hours
+1,Dep_A,37,6,6,3,34,5,4,19,25,8,6,5,Marsa(3) PS(2) KPC(0) CD(0),2,5,0,0
