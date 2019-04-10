@@ -1,0 +1,20 @@
+<div class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header accent p-24">
+        <h2>המלצת שיבוץ</h2> 
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">        
+        <!-- departments status widgets place holder-->
+
+        <recommendation *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus" 
+                        [patients]="recommendedPatientsStatus">
+        </recommendation>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
