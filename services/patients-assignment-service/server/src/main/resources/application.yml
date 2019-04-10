@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: hakaton-rambam-patients-assignment-service
+server:
+  port: 9024
+eureka:
+  client:
+    serviceUrl:
+     defaultZone: http://localhost:9000/eureka
+  instance:
+      preferIpAddress: true

@@ -1,0 +1,31 @@
+@import "src/@fuse/scss/fuse";
+
+file-list {
+    width: 100%;
+
+    .mat-table {
+        background: transparent;
+        box-shadow: none;
+
+        .mat-row {
+            position: relative;
+            cursor: pointer;
+            min-height: 64px;
+        }
+    }
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.cards .card {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 12px 24px;
+    margin-bottom: 16px;
+}

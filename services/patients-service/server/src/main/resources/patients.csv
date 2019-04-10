@@ -1,0 +1,14 @@
+id,department,gender,returningPatient,previousReleasingDepartment,totalTimeInMelrad,waitingTime,givenArtificialRespiration,nursingComplexityIndependentPatient,nursingComplexityNursedPatient,medicalComplexityMonitor,medicalComplexityOxygen,isolationResistant,isolationType,neutropeticPatient
+111,,Female,false,,9.5,3.2,true,false,true,true,false,true,Marsa,false
+112,,Male,false,,5,1.2,false,true,false,false,false,false,,false
+113,,Female,true,General Dep. A,8.3,2.7,true,false,true,true,false,false,,false
+114,,Male,true,General Dep. C,5,1.2,false,true,false,false,false,false,,false
+115,,Male,false,,6.1,0.9,false,false,true,true,true,false,,false
+116,,Male,false,,5.3,0.7,true,false,true,true,true,true,PS,false
+117,,Female,true,General Dep. G,12,4.3,false,true,false,false,false,false,,true
+118,,Female,false,,7.7,2.9,false,false,true,false,true,false,,false
+119,,Female,false,,4,2.3,false,false,true,false,true,true,CD,false
+120,,Male,false,,9.1,4.3,false,false,true,false,false,false,,true
+121,,Female,false,,6.8,2.2,false,true,false,false,true,false,,false
+122,,Male,false,,20,16,false,true,false,false,false,true,KPC,false
+123,,Male,true,General Dep. C,3,0.5,false,true,false,false,false,false,,false

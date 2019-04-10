@@ -1,0 +1,104 @@
+<div class="page-layout simple tabbed">
+
+    <!-- HEADER -->
+    <div class="header accent p-24">
+        <h2>Patients</h2>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <mat-table #table [dataSource]="patients">
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef fxFlex="128px">Id</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="department">
+                <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.department}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+                <mat-header-cell *matHeaderCellDef >Gender</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.gender}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="returningPatient">
+                <mat-header-cell *matHeaderCellDef >Returning Patient</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.returningPatient}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="previousReleasingDepartment">
+                <mat-header-cell *matHeaderCellDef>Previous Releasing Department</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.previousReleasingDepartment}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="totalTimeInMelrad">
+                <mat-header-cell *matHeaderCellDef>Total Time In Melrad</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.totalTimeInMelrad}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="waitingTime">
+                <mat-header-cell *matHeaderCellDef>Waiting Time</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.waitingTime}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="givenArtificialRespiration">
+                <mat-header-cell *matHeaderCellDef>Given Artificial Respiration</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.givenArtificialRespiration}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nursingComplexityIndependentPatient">
+                <mat-header-cell *matHeaderCellDef>Nursing Complexity Independent Patient</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.nursingComplexityIndependentPatient}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="nursingComplexityNursedPatient">
+                <mat-header-cell *matHeaderCellDef>Nursing Complexity Nursed Patient</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.nursingComplexityNursedPatient}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="medicalComplexityMonitor">
+                <mat-header-cell *matHeaderCellDef>Medical Complexity Monitor</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.medicalComplexityMonitor}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="medicalComplexityOxygen">
+                <mat-header-cell *matHeaderCellDef>Medical Complexity Oxygen</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.medicalComplexityOxygen}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isolationResistant">
+                <mat-header-cell *matHeaderCellDef>Isolation Resistant</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.isolationResistant}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="isolationType">
+                <mat-header-cell *matHeaderCellDef>Isolation Type</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.isolationType}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="neutropeticPatient">
+                <mat-header-cell *matHeaderCellDef>Neutropetic Patient</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.neutropeticPatient}}</mat-cell>
+            </ng-container>
+
+            <!-- Modified Column -->
+            <!--<ng-container matColumnDef="admission">
+                <mat-header-cell *matHeaderCellDef>Admission</mat-header-cell>
+                <mat-cell *matCellDef="let row" >{{row.admission | date:'dd/MM/yyyy HH:mm'}}</mat-cell>
+            </ng-container>-->
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"
+                     (click)="onSelect(row)"
+                     [ngClass]="{'selected' : row == selected}"
+                     matRipple
+            >
+            </mat-row>
+        </mat-table>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>

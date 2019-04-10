@@ -1,0 +1,111 @@
+<div class="content" *ngIf="status$ | async as status">
+    <div class="cards">
+        <div class="card">
+            <div class="fuse-card">
+
+                <div class="p-16">
+                    <div class="h1">Patients</div>
+                    <div class="h4 secondary-text">Count</div>
+                </div>
+
+                <div class="p-16 pt-0 line-height-1.75">
+                    <div>Patients: {{status.patients.length}}</div>
+                    <div>Female: {{summary.totalFemale}}</div>
+                    <div>Male: {{summary.totalMale}}</div>
+                    <div>Average Age: {{summary.avgAge}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="fuse-card">
+
+                <div class="p-16">
+                    <div class="h1">Beds</div>
+                    <div class="h4 secondary-text">Count / Capacity</div>
+                </div>
+
+                <div class="p-16 pt-0 line-height-1.75">
+                    <div>Normal: {{summary.totalBedNormal}} / {{status.capacity.normal}}</div>
+                    <div>Isolation: {{summary.totalBedIsolation}} / {{status.capacity.isolation}}</div>
+                    <div>Unit: {{summary.totalBedUnit}} / {{status.capacity.unit}}</div>
+                    <div>Corridor: {{summary.totalBedCorridor}} / {{status.capacity.corridor}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="fuse-card">
+
+                <div class="p-16">
+                    <div class="h1">Complexity</div>
+                    <div class="h4 secondary-text">Count - Fair is Fair</div>
+                </div>
+
+                <div class="p-16 pt-0 line-height-1.75">
+                    <div>Asissted: {{summary.totalAsissted}} / {{status.patients.length}} ({{100 * summary.totalAsissted / status.patients.length}}%)</div>
+                    <div>Intubated: {{summary.totalIntubated}} / {{status.patients.length}} ({{100 * summary.totalIntubated / status.patients.length}}%)</div>
+                    <div>Monitor: {{summary.totalMedicalMonitor}} / {{status.patients.length}} ({{100 * summary.totalMedicalMonitor / status.patients.length}}%)</div>
+                    <div>Oxygen: {{summary.totalMedicalOxygen}} / {{status.patients.length}} ({{100 * summary.totalMedicalOxygen / status.patients.length}}%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-table #table [dataSource]="status.patients">
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxFlex="128px">Id</mat-header-cell>
+            <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.id}}</mat-cell>        
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gender">
+            <mat-header-cell *matHeaderCellDef >Gender</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.gender}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef >Age</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.age}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="intubated">
+            <mat-header-cell *matHeaderCellDef>Intubated</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.intubated}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="isolation">
+            <mat-header-cell *matHeaderCellDef>Isolation</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.isolation}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="assisted">
+            <mat-header-cell *matHeaderCellDef>Assisted</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.assisted}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="medical">
+            <mat-header-cell *matHeaderCellDef>Medical</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.medical}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bed">
+            <mat-header-cell *matHeaderCellDef>Bed</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.bed}}</mat-cell>
+        </ng-container>
+
+        <!-- Modified Column -->
+        <ng-container matColumnDef="admission">
+            <mat-header-cell *matHeaderCellDef>Admission</mat-header-cell>
+            <mat-cell *matCellDef="let row" >{{row.admission | date:'dd/MM/yyyy HH:mm'}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="onSelect(row)"
+                [ngClass]="{'selected' : row == selected}"
+                matRipple
+        >
+        </mat-row>
+    </mat-table>
+</div>
