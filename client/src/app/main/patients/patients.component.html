@@ -2,7 +2,7 @@
 
     <!-- HEADER -->
     <div class="header accent p-24">
-        <h2>Patients</h2>
+        <h2>רשימת חולים</h2>
     </div>
     <!-- / HEADER -->
 
@@ -14,6 +14,23 @@
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef fxFlex="128px">Id</mat-header-cell>
                 <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="בחר">
+                <mat-header-cell *matHeaderCellDef fxFlex="128px">בחר</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxFlex="128px">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (checked)="row.selected">
+                    </mat-checkbox>
+                    <span>{{row.selected}}</span>
+                </mat-cell>
+
+            </ng-container>
+
+            <ng-container matColumnDef="Assignment">
+                <mat-header-cell *matHeaderCellDef>Assignment</mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    {{row.assignment}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="department">

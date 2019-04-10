@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import {IPatientStatus} from '../sample/sample.model';
 import {Observable} from 'rxjs';
 import {PATIENTS_SERVICE} from '../constants';
+import {switchMap} from "rxjs-compat/operator/switchMap";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class PatientsStatusService {

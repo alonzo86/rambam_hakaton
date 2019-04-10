@@ -33,7 +33,7 @@ public class DataInitializer {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();
             File file = new ClassPathResource("departments.csv").getFile();
-            mapper.reader().with(bootstrapSchema).readValues(file)
+            mapper.reader(Department.class).with(bootstrapSchema).readValues(file)
                     .readAll()
                     .stream()
                     .map(item -> (Department)item)
