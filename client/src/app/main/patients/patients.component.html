@@ -17,7 +17,12 @@
         <mat-table *ngIf="patients$ | async as patients" #table [dataSource]="patients">
 
             <ng-container matColumnDef="selected">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">בחר</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="128px">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="selectAll(patients)"
+                                  [checked]="allSelected">
+                    </mat-checkbox>
+                    </mat-header-cell>
                 <mat-cell *matCellDef="let row" fxFlex="128px">
                     <mat-checkbox (click)="$event.stopPropagation()"
                                   (change)="changeSelection($event,row)"
@@ -91,7 +96,6 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"
-                     (click)="onSelect(row)"
                      [ngClass]="{'selected' : row == selected}"
                      matRipple
             >

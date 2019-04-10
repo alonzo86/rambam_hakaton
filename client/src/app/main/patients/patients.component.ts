@@ -42,10 +42,18 @@ export class PatientsComponent implements OnInit {
     }
 
     changeSelection(cg: any , row): boolean {
-        return row.selected = cg.value;
+        this.allSelected = false;
+        return row.selected = cg.checked;
     }
+
     openDialog(): void {
-        const dialogRef = this.dialog.open(DialogComponent, {width: '80em', height: '40em'});
+        const dialogRef = this.dialog.open(DialogComponent, {
+            width: '80em',
+            height: '40em',
+            data: {
+                patients: []
+            }
+        });
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -53,9 +61,7 @@ export class PatientsComponent implements OnInit {
     }
 
     selectAll(patients): void {
-        if (this.allSelected) {
-            this.allSelected = true;
-        }
+        this.allSelected = !this.allSelected;
         for (let patient of patients) {
             patient.selected = this.allSelected;
         }
