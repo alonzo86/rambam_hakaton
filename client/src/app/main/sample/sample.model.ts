@@ -22,7 +22,7 @@ export interface IPatientStatus {
     isolationResistant: boolean;
     isolationType: string;
     neutropeticPatient: boolean;
-    selected:boolean;
+    selected: boolean;
 }
 
 export interface IUnitStatus {

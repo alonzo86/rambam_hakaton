@@ -1,5 +1,6 @@
 package com.hakaton.rambam.patients;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.hakaton.rambam.patients.patient.PatientService;
@@ -14,6 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 @Component
 public class DataInitializer {
@@ -29,17 +31,22 @@ public class DataInitializer {
 
     @PostConstruct
     private void setupData() {
+        getDataFromCsv("patients0.csv").forEach (this.patientService::create);
+    }
+
+    public static Stream<Patient> getDataFromCsv(String fileName) {
+        Stream<Patient> stream = null;
         try {
             CsvSchema bootstrapSchema = CsvSchema.emptySchema().withHeader();
             CsvMapper mapper = new CsvMapper();
-            File file = new ClassPathResource("patients.csv").getFile();
-            mapper.reader(Patient.class).with(bootstrapSchema).readValues(file)
+            File file = new ClassPathResource(fileName).getFile();
+            stream = mapper.reader(Patient.class).with(bootstrapSchema).readValues(file)
                     .readAll()
                     .stream()
-                    .map(item -> (Patient)item)
-                    .forEach (this.patientService::create);
+                    .map(item -> (Patient) item);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
+        return stream;
     }
 }

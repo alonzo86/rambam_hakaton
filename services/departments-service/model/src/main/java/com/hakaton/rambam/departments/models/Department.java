@@ -15,22 +15,27 @@ public class Department {
     @Id
     private long id;
     private String name;
+    private int hallwayFreeBedCount;
+    private int hallwayOccupiedBedCount;
+    private int hallwayAcceptedLast24Hours;
+    private int singleFreeBedCount;
+    private int singleOccupiedBedCount;
+    private int singleAcceptedLast24Hours;
+    private int emergencyFreeBedCount;
+    private int emergencyOccupiedBedCount;
+    private int emergencyAcceptedLast24Hours;
+    private int emergencyCancelledTypeA;
+    private int emergencyCancelledTypeB;
+    private int emergencyCancelledTypeC;
+    private int emergencyCancelledTypeD;
+    private int emergencyCancelledTypeE;
+    private int regularFreeBedCount;
+    private int regularOccupiedBedCount;
+    private int regularAcceptedLast24Hours;
+    private int regularCancelledTypeA;
+    private int regularCancelledTypeB;
+    private int regularCancelledTypeC;
+    private int regularCancelledTypeD;
+    private int regularCancelledTypeE;
     private int totalBedCount;
-    private int emergencyBedCount;
-    private int isolationRoomsCount;
-    private int hallwayBedCount;
-    private int currentPatientCount;
-    private int emergencyPatientCount;
-    private int respirationPatientCount;
-    private int nursingPatientCount;
-    private int independentPatientCount;
-    private int oxygenSupportPatientCount;
-    private int monitoredPatientCount;
-    private int isolationPatientCount;
-    private String isolationType;
-    private int canceledBedType;
-    private int neutrophillPatientCount;
-    private int actualHallwayPatientCount;
-    private int patientAcceptedLast24Hours;
-
-    }
+}

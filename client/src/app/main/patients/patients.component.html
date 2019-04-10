@@ -16,98 +16,71 @@
 
         <mat-table *ngIf="patients$ | async as patients" #table [dataSource]="patients">
 
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">Id</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.id}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="בחר">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">
-                    <mat-checkbox (click)="$event.stopPropagation()"
-                                  (change)="selectAll(patients)"
-                                  (checked)="allSelected">
-                    </mat-checkbox>
-                </mat-header-cell>
+            <ng-container matColumnDef="selected">
+                <mat-header-cell *matHeaderCellDef fxFlex="128px">בחר</mat-header-cell>
                 <mat-cell *matCellDef="let row" fxFlex="128px">
                     <mat-checkbox (click)="$event.stopPropagation()"
                                   (change)="changeSelection($event,row)"
                                   [checked]="row.selected">
                     </mat-checkbox>
                 </mat-cell>
-
             </ng-container>
 
-            <ng-container matColumnDef="Assignment">
-                <mat-header-cell *matHeaderCellDef>Assignment</mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    {{row.assignment}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="department">
-                <mat-header-cell *matHeaderCellDef>Department</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.department}}</mat-cell>
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef fxFlex="128px">מס' מטופל</mat-header-cell>
+                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.id}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="gender">
-                <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef >מגדר</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.gender}}</mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="returningPatient">
-                <mat-header-cell *matHeaderCellDef>Returning Patient</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.returningPatient}}</mat-cell>
-            </ng-container>
-
             <ng-container matColumnDef="previousReleasingDepartment">
-                <mat-header-cell *matHeaderCellDef>Previous Releasing Department</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>מחלקה משחררת באשפוז הקודם</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.previousReleasingDepartment}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="totalTimeInMelrad">
-                <mat-header-cell *matHeaderCellDef>Total Time In Melrad</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>סה"כ זמן שהיה במלרד (שעות)</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.totalTimeInMelrad}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="waitingTime">
-                <mat-header-cell *matHeaderCellDef>Waiting Time</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>זמן המתנה מחתימה על אשפוז לפנימיות (שעות)</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.waitingTime}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="givenArtificialRespiration">
-                <mat-header-cell *matHeaderCellDef>Given Artificial Respiration</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.givenArtificialRespiration}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef>מונשם</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.givenArtificialRespiration ? 'כן' : 'לא'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="nursingComplexityIndependentPatient">
-                <mat-header-cell *matHeaderCellDef>Nursing Complexity Independent Patient</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.nursingComplexityIndependentPatient}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="nursingComplexityNursedPatient">
-                <mat-header-cell *matHeaderCellDef>Nursing Complexity Nursed Patient</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.nursingComplexityNursedPatient}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef>עצמאי/סיעודי</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.nursingComplexityIndependentPatient ? 'עצמאי' : 'סיעודי'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="medicalComplexityMonitor">
-                <mat-header-cell *matHeaderCellDef>Medical Complexity Monitor</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.medicalComplexityMonitor}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef>מוניטור</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.medicalComplexityMonitor ? 'כן' : 'לא'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="medicalComplexityOxygen">
-                <mat-header-cell *matHeaderCellDef>Medical Complexity Oxygen</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.medicalComplexityOxygen}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="isolationResistant">
-                <mat-header-cell *matHeaderCellDef>Isolation Resistant</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.isolationResistant}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef>חמצן</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.medicalComplexityOxygen ? 'כן' : 'לא'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="isolationType">
-                <mat-header-cell *matHeaderCellDef>Isolation Type</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>סוג בידוד</mat-header-cell>
                 <mat-cell *matCellDef="let row">{{row.isolationType}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="neutropeticPatient">
-                <mat-header-cell *matHeaderCellDef>Neutropetic Patient</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row.neutropeticPatient}}</mat-cell>
+                <mat-header-cell *matHeaderCellDef>נויטרופני</mat-header-cell>
+                <mat-cell *matCellDef="let row">{{row.neutropeticPatient ? 'כן' : 'לא'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="department">
+                <mat-header-cell *matHeaderCellDef>שיבוץ</mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.department}}</mat-cell>
             </ng-container>
 
             <!-- Modified Column -->

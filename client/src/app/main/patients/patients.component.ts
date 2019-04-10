@@ -21,10 +21,10 @@ export class PatientsComponent implements OnInit {
 
     public patients$: Observable<IPatientStatus[]>;
 
-    displayedColumns = ['id', 'בחר', 'Assignment', 'department', 'gender', 'returningPatient', 'previousReleasingDepartment', 'totalTimeInMelrad',
+    displayedColumns = ['selected', 'id', 'department', 'gender', 'previousReleasingDepartment', 'totalTimeInMelrad',
         'waitingTime', 'givenArtificialRespiration', 'nursingComplexityIndependentPatient',
-        'nursingComplexityNursedPatient', 'medicalComplexityMonitor', 'medicalComplexityOxygen',
-        'isolationResistant', 'isolationType', 'neutropeticPatient'];
+        'medicalComplexityMonitor', 'medicalComplexityOxygen',
+        'isolationType', 'neutropeticPatient'];
 
     constructor(private patientsStatusService: PatientsStatusService,private dialog:MatDialog) {
         this.allSelected = false;
