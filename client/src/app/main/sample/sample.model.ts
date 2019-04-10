@@ -8,6 +8,7 @@ export interface IUnitCapacity {
 export interface IPatientStatus {
     id: string;
     department: string;
+    assignment: string;
     gender: string;
     returningPatient: boolean;
     previousReleasingDepartment: string;
@@ -21,6 +22,7 @@ export interface IPatientStatus {
     isolationResistant: boolean;
     isolationType: string;
     neutropeticPatient: boolean;
+    selected:boolean;
 }
 
 export interface IUnitStatus {

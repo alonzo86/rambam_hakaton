@@ -18,6 +18,7 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import {PatientsModule} from './main/patients/patients.module';
+import {DialogModule} from "./layout/components/dialog/dialog.module";
 
 const appRoutes: Routes = [
     {
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
         // App modules
         LayoutModule,
         PatientsModule,
-        SampleModule
+        SampleModule,
+        DialogModule
     ],
     bootstrap   : [
         AppComponent

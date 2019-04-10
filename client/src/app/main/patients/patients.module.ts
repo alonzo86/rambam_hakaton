@@ -3,7 +3,15 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-import { MatButtonModule, MatIconModule, MatTabsModule, MatRippleModule, MatSlideToggleModule, MatTableModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatRippleModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatCheckboxModule, MatDialogModule
+} from '@angular/material';
 import {PatientsStatusService} from './patients.service';
 import {PatientsComponent} from './patients.component';
 
@@ -25,6 +33,8 @@ const routes = [
         MatSlideToggleModule,
         MatTableModule,
         MatTabsModule,
+        MatCheckboxModule,
+        MatDialogModule,
         FuseSharedModule
     ],
     providers: [PatientsStatusService],
