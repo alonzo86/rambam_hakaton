@@ -2,7 +2,12 @@
 
     <!-- HEADER -->
     <div class="header accent p-24">
-        <h2>רשימת חולים</h2>
+        <div class="flex-container">
+            <h2>רשימת חולים</h2>
+            <div class="example-button-row appButton">
+                <button mat-stroked-button color="accent" style="color:white" (click)="openDialog()" >המלצות</button>
+            </div>
+        </div>
     </div>
     <!-- / HEADER -->
 
@@ -20,9 +25,9 @@
                 <mat-header-cell *matHeaderCellDef fxFlex="128px">בחר</mat-header-cell>
                 <mat-cell *matCellDef="let row" fxFlex="128px">
                     <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="changeSelection(row)"
                                   (checked)="row.selected">
                     </mat-checkbox>
-                    <span>{{row.selected}}</span>
                 </mat-cell>
 
             </ng-container>
@@ -39,12 +44,12 @@
             </ng-container>
 
             <ng-container matColumnDef="gender">
-                <mat-header-cell *matHeaderCellDef >Gender</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.gender}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="returningPatient">
-                <mat-header-cell *matHeaderCellDef >Returning Patient</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Returning Patient</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.returningPatient}}</mat-cell>
             </ng-container>
 

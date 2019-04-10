@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
 import {map} from "rxjs/operators";
+import {SelectionModel} from "@angular/cdk/typings/esm5/collections";
+import {MatDialog} from "@angular/material";
+import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 
 @Component({
     selector   : 'patients',
@@ -15,6 +18,7 @@ export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     selected:boolean;
 
+
     public patients: Observable<IPatientStatus[]>;
 
     displayedColumns = ['id', 'בחר', 'Assignment', 'department', 'gender', 'returningPatient', 'previousReleasingDepartment', 'totalTimeInMelrad',
@@ -22,7 +26,7 @@ export class PatientsComponent implements OnInit {
         'nursingComplexityNursedPatient', 'medicalComplexityMonitor', 'medicalComplexityOxygen',
         'isolationResistant', 'isolationType', 'neutropeticPatient'];
 
-    constructor(private patientsStatusService: PatientsStatusService) {
+    constructor(private patientsStatusService: PatientsStatusService,private dialog:MatDialog) {
     }
 
     ngOnInit(): void {
@@ -37,8 +41,15 @@ export class PatientsComponent implements OnInit {
         );
     }
 
-    changeSelection(val): boolean {
-        return !val;
+    changeSelection(row): boolean {
+        return row.selected = !row.selected;
+    }
+    openDialog() {
+        const dialogRef = this.dialog.open(DialogComponent);
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
     }
 }
 
