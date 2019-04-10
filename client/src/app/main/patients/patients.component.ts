@@ -3,10 +3,9 @@ import { fuseAnimations } from '@fuse/animations';
 import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
-import {map} from "rxjs/operators";
-import {SelectionModel} from "@angular/cdk/typings/esm5/collections";
-import {MatDialog} from "@angular/material";
-import {DialogComponent} from "../../layout/components/dialog/dialog.component";
+import {map} from 'rxjs/operators';
+import {MatDialog} from '@angular/material';
+import {DialogComponent} from '../../layout/components/dialog/dialog.component';
 
 @Component({
     selector   : 'patients',
@@ -16,7 +15,7 @@ import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 })
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
-    allSelected:boolean;
+    allSelected: boolean;
 
 
     public patients$: Observable<IPatientStatus[]>;
@@ -26,7 +25,7 @@ export class PatientsComponent implements OnInit {
         'medicalComplexityMonitor', 'medicalComplexityOxygen',
         'isolationType', 'neutropeticPatient'];
 
-    constructor(private patientsStatusService: PatientsStatusService,private dialog:MatDialog) {
+    constructor(private patientsStatusService: PatientsStatusService, private dialog: MatDialog) {
         this.allSelected = false;
     }
 
@@ -45,24 +44,21 @@ export class PatientsComponent implements OnInit {
     changeSelection(cg: any , row): boolean {
         return row.selected = cg.value;
     }
-    openDialog() {
-        const dialogRef = this.dialog.open(DialogComponent);
+    openDialog(): void {
+        const dialogRef = this.dialog.open(DialogComponent, {width: '80em', height: '40em'});
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
     }
-    selectAll(patients) {
-        if(this.allSelected) {
+
+    selectAll(patients): void {
+        if (this.allSelected) {
             this.allSelected = true;
         }
         for (let patient of patients) {
             patient.selected = this.allSelected;
         }
-
-
-
-
     }
 }
 

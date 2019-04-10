@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatRippleModule, MatSlideToggleModule, MatTableModule} from '@angular/material';
 
 import {FuseSharedModule} from '@fuse/shared.module';
 
@@ -13,7 +13,9 @@ import {DialogComponent} from 'app/layout/components/dialog/dialog.component';
     imports     : [
         RouterModule,
         MatDialogModule,
-        FuseSharedModule
+        FuseSharedModule,
+        MatRippleModule,
+        MatTableModule
     ],
     exports     : [
         DialogComponent
