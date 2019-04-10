@@ -7,12 +7,13 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content">        
-        <!-- departments status widgets place holder-->
+    <div class="content">
 
-        <recommendation *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus" 
+        <departments></departments>
+        <recommendation *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus"
                         [patients]="recommendedPatientsStatus">
         </recommendation>
+
 
     </div>
     <!-- / CONTENT -->

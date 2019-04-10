@@ -14,14 +14,14 @@
     <!-- CONTENT -->
     <div class="content">
 
-        <mat-table #table [dataSource]="patients">
+        <mat-table *ngIf="patients$ | async as patients" #table [dataSource]="patients">
 
             <ng-container matColumnDef="selected">
                 <mat-header-cell *matHeaderCellDef fxFlex="128px">בחר</mat-header-cell>
                 <mat-cell *matCellDef="let row" fxFlex="128px">
                     <mat-checkbox (click)="$event.stopPropagation()"
-                                  (change)="changeSelection(row)"
-                                  (checked)="row.selected">
+                                  (change)="changeSelection($event,row)"
+                                  [checked]="row.selected">
                     </mat-checkbox>
                 </mat-cell>
             </ng-container>
