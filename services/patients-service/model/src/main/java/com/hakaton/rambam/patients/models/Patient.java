@@ -1,5 +1,6 @@
 package com.hakaton.rambam.patients.models;
 
+import com.hakaton.rambam.departments.models.Department;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -29,4 +30,8 @@ public class Patient {
     private boolean isolationResistant;
     private String isolationType;
     private boolean neutropeticPatient;
+
+    private BedTypeEnum bedType;
+    private Department assigndDepartment;
 }
+

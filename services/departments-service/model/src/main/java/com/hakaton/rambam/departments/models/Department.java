@@ -32,4 +32,5 @@ public class Department {
     private int neutrophillPatientCount;
     private int actualHallwayPatientCount;
     private int patientAcceptedLast24Hours;
-}
+
+    }
