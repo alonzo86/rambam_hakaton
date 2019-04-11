@@ -6,6 +6,7 @@ import {PatientsStatusService} from './patients.service';
 import {MatDialog, MatPaginator, MatTableDataSource, MatDialogConfig} from '@angular/material';
 import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
 import {map} from 'rxjs/operators';
+import {DepartmentsStatusService} from '../results/departments/departments.service';
 
 @Component({
     selector   : 'patients',
@@ -16,7 +17,6 @@ import {map} from 'rxjs/operators';
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected: boolean;
-    currSelected:Array<IPatientStatus> = [];
     resultsLength = 0;
 
     dataSource: MatTableDataSource<IPatientStatus>;
@@ -28,7 +28,9 @@ export class PatientsComponent implements OnInit {
         'medicalComplexityMonitor', 'medicalComplexityOxygen',
         'isolationType', 'neutropeticPatient'];
 
-    constructor(private patientsStatusService: PatientsStatusService, private dialog: MatDialog) {
+    constructor(private patientsStatusService: PatientsStatusService,
+                private dialog: MatDialog,
+                private departmentsService: DepartmentsStatusService) {
         this.allSelected = false;
     }
 
@@ -52,29 +54,26 @@ export class PatientsComponent implements OnInit {
 
     changeSelection(cg: any , row): boolean {
         this.allSelected = false;
-        if(cg.checked) {
-            this.currSelected.push(row);
-        }else {
-            this.currSelected.forEach( (item, index) => {
-                if(item === row) this.currSelected.splice(index,1);
-            });
-        }
         return row.selected = cg.checked;
     }
 
     openDialog(): void {
         const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = false;
-        dialogConfig.autoFocus = true;
-        dialogConfig.data = {
-            patients:this.currSelected
-        };
-        dialogConfig.width = '90em';
-        dialogConfig.height = '55em';
-        const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
+        this.departmentsService.getDepartments().subscribe(departments => {
+            dialogConfig.disableClose = false;
+            dialogConfig.autoFocus = true;
+            dialogConfig.data = {
+                departments: departments,
+                allPatients: this.dataSource.data.filter(p => !p.selected),
+                selectedPatients: this.dataSource.data.filter(p => p.selected)
+            };
+            dialogConfig.width = '90em';
+            dialogConfig.height = '55em';
+            const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
 
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
+            dialogRef.afterClosed().subscribe(result => {
+                console.log(`Dialog result: ${result}`);
+            });
         });
     }
 
@@ -83,15 +82,5 @@ export class PatientsComponent implements OnInit {
         for (let patient of patients) {
             patient.selected = this.allSelected;
         }
-        if(this.allSelected){
-            this.currSelected = patients;
-        } else {
-            this.currSelected = [];
-        }
     }
 }
-
-
-
-
-

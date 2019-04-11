@@ -60,7 +60,7 @@ export class RecommendationComponent implements OnInit {
     onAssignmentChange(data: MatSelectChange, patient: IPatientStatus) {
         const newValue = data.value;
         const originalPatient = this.getOriginalPatient(patient);
-        console.log(`onAssignmentChange ${originalPatient.assignment}->${newValue}`, data);
+        console.log(`onAssignmentChange ${originalPatient.assigndDepartment}->${newValue}`, data);
         this.requireComment = this.calculateNeedComment();
     }
 
@@ -75,7 +75,7 @@ export class RecommendationComponent implements OnInit {
     private calculateNeedComment(): boolean {
         for (const patient of this.patients) {
             const opatient = this.getOriginalPatient(patient);
-            if (opatient.assignment !== patient.assignment) {
+            if (opatient.assigndDepartment !== patient.assigndDepartment) {
                 return true;
             }
         }

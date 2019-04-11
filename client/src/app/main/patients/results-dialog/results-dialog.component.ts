@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material";
-import {IPatientStatus} from "../../sample/sample.model";
+import {IDepartmentStatus, IPatientStatus} from '../../sample/sample.model';
 
 @Component({
     selector: 'app-results-dialog',
@@ -9,10 +9,14 @@ import {IPatientStatus} from "../../sample/sample.model";
 })
 export class ResultsDialogComponent implements OnInit {
     resultExist: boolean;
-    patients: Array<IPatientStatus> = [];
+    selectedPatients: Array<IPatientStatus> = [];
+    allPatients: Array<IPatientStatus> = [];
+    departments: Array<IDepartmentStatus> = [];
 
     constructor(@Inject(MAT_DIALOG_DATA) data) {
-        this.patients = data.patients;
+        this.selectedPatients = data.selectedPatients;
+        this.allPatients = data.allPatients;
+        this.departments = data.departments;
         this.resultExist = false;
     }
 

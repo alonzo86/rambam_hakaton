@@ -9,7 +9,7 @@ export interface IPatientStatus {
     id: string;
     name: string;
     department: string;
-    assignment: string;
+    assigndDepartment: string;
     gender: string;
     returningPatient: boolean;
     previousReleasingDepartment: string;

@@ -57,7 +57,7 @@
         <ng-container matColumnDef="assignment">
             <mat-header-cell *matHeaderCellDef>המלצה</mat-header-cell>
             <mat-cell *matCellDef="let patient">
-                <mat-select [(value)]="patient.assignment" (selectionChange)="onAssignmentChange($event, patient)">
+                <mat-select [(value)]="patient.assigndDepartment" (selectionChange)="onAssignmentChange($event, patient)">
                     <mat-option>ללא שיבוץ</mat-option>
                     <mat-option value="A">א</mat-option>
                     <mat-option value="B">ב</mat-option>

@@ -41,7 +41,7 @@ public class DepartmentUtility {
             double normalizedOccupancyPercentage = getOccupied(department, bedType) *  maxOccupencyPercentage / getStandard(department, bedType);
             double normalizedLast24Hours = getLast24Hours(department) / maxLast24Hours;
             //get number of patients waiting for the same bed in current department
-            double normalizedWaitingListSize = waitingList.stream()
+            double normalizedWaitingListSize = maxWaitingListSize==0?0: waitingList.stream()
                     .filter(p -> p.getDepartment() != null && p.getDepartment().equals(department.getName()))
                     .count() / maxWaitingListSize;
 

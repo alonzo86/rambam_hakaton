@@ -1,22 +1,19 @@
 import { Injectable } from '@angular/core';
-import { IPatientStatus } from '../sample/sample.model';
-import { Observable, from, of } from 'rxjs';
-import {delay} from "rxjs/operators";
+import {IDepartmentStatus, IPatientStatus} from '../sample/sample.model';
+import { Observable } from 'rxjs';
+import {PATIENTS_ASSIGNMENT_SERVICE} from '../constants';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class ResultsService {
 
-    getResultsFromRecommendationService(patients: IPatientStatus[]): Observable<IPatientStatus[]> {
+    constructor(private _httpClient: HttpClient) { }
 
-        let newPatients: IPatientStatus[];
-        newPatients = [];
-        for (const patient of patients) {
-            const clone = Object.assign({}, patient);
-            clone.assignment = 'A';
-            newPatients.push(clone);
-        }
-
-        return of(newPatients).pipe(delay(3000  ));
+    getResultsFromRecommendationService(selectedPatients: IPatientStatus[], allPatients: IPatientStatus[], departments: IDepartmentStatus[]): Observable<IPatientStatus[]> {
+        return this._httpClient.post<IPatientStatus[]>(`${PATIENTS_ASSIGNMENT_SERVICE}/assignments`, {
+            patients: selectedPatients,
+            departments: departments,
+            waiting: allPatients
+        });
     }
-    
 }
