@@ -40,7 +40,9 @@ export class DepartmentsComponent implements OnInit {
                         rows[0][d.name] = rows[0][d.name] || {};
                         rows[1][d.name] = rows[1][d.name] || {};
 
-                        rows[0][d.name].used = d.emergencyOccupiedBedCount + d.hallwayOccupiedBedCount + d.regularOccupiedBedCount + d.singleOccupiedBedCount;
+                        rows[0][d.name].used = d.emergencyOccupiedBedCount + d.hallwayOccupiedBedCount + d.regularOccupiedBedCount + d.singleOccupiedBedCount +
+                            d.regularCancelledTypeA + d.regularCancelledTypeB + d.regularCancelledTypeC + d.regularCancelledTypeD + d.regularCancelledTypeE +
+                            d.emergencyCancelledTypeA + d.emergencyCancelledTypeB + d.emergencyCancelledTypeC + d.emergencyCancelledTypeD + d.emergencyCancelledTypeE;
                         rows[0][d.name].total = d.totalBedCount;
 
                         rows[1][d.name].used = d.emergencyOccupiedBedCount;
