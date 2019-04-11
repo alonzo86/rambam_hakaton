@@ -14,7 +14,11 @@ public class PatientAssignmentService {
 
         DepartmentUtility departmentUtility = new DepartmentUtility();
         for (Patient patient : patients) {
-            patient.setAssigndDepartment(departmentUtility.getBestDepartment(departments, waiting, patient).getName());
+            if (patient.isReturningPatient() && patient.getWaitingTime() < 12) {
+                patient.setAssigndDepartment(patient.getPreviousReleasingDepartment());
+            } else {
+                patient.setAssigndDepartment(departmentUtility.getBestDepartment(departments, waiting, patient).getName());
+            }
         }
         return patients;
     }
