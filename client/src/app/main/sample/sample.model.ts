@@ -35,7 +35,6 @@ export interface IDepartmentStatus {
     singleFreeBedCount: number;
     singleOccupiedBedCount: number;
     singleAcceptedLast24Hours: number;
-    emergencyBedCount: number;
     emergencyFreeBedCount: number;
     emergencyOccupiedBedCount: number;
     emergencyAcceptedLast24Hours: number;
@@ -53,6 +52,10 @@ export interface IDepartmentStatus {
     regularCancelledTypeD: number;
     regularCancelledTypeE: number;
     totalBedCount: number;
+    hallwayBedCount: number;
+    singleBedCount: number;
+    emergencyBedCount: number;
+    regularBedCount: number;
 }
 
 export interface IUnitStatus {
