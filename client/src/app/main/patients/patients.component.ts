@@ -5,7 +5,6 @@ import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
 import {map} from 'rxjs/operators';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../layout/components/dialog/dialog.component';
 import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
 
 @Component({
@@ -62,8 +61,8 @@ export class PatientsComponent implements OnInit {
         dialogConfig.data = {
             patients:this.currSelected
         };
-        dialogConfig.width = '80em';
-        dialogConfig.height = '40em';
+        dialogConfig.width = '90em';
+        dialogConfig.height = '55em';
         const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
