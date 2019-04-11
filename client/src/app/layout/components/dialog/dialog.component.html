@@ -1,47 +1,6 @@
 <div>
     <div class="top-part">
-        <mat-table *ngIf="departments$ | async as departments" #table [dataSource]="departments">
-            <ng-container matColumnDef="category">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px"></mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.category}}</mat-cell>
-            </ng-container>
 
-            <ng-container matColumnDef="A">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית א</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.A}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="B">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ב</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.B}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="C">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ג</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.C}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="D">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ד</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.D}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="E">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ה</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.E}}</mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="H">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ח</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.H}}</mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedDepsColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedDepsColumns;"
-                     [ngClass]="{'selected' : row == selected}"
-                     matRipple>
-            </mat-row>
-        </mat-table>
     </div>
     <div class="table">
 

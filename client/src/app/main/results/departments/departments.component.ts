@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IPatientStatus } from 'app/main/sample/sample.model';
-import { Observable, of } from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import {PatientsStatusService} from '../../patients/patients.service';
+import {DepartmentsStatusService} from './departments.service';
 
 interface DepartmentRow {
     category: string;
@@ -13,17 +15,6 @@ interface DepartmentRow {
     H: string;
 }
 
-interface Department {
-    name: string;
-    totalBeds: number;
-    usedBeds: number;
-    totalResperated: number;
-    usedResperated: number;
-    usedLast24Hours: number;
-    alreadyAssigned: number;
-}
-
-
 @Component({
     selector: 'departments',
     templateUrl: './departments.component.html',
@@ -32,86 +23,33 @@ interface Department {
 export class DepartmentsComponent implements OnInit {
     @Input() patients: IPatientStatus[];
 
-    public departments$: Observable<DepartmentRow[]>;
-    data: Department[] = [
-        {
-            name: 'A',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        },
-        {
-            name: 'B',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        },
-        {
-            name: 'C',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        },
-        {
-            name: 'D',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        },
-        {
-            name: 'E',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        },
-        {
-            name: 'H',
-            totalBeds: 30,
-            usedBeds: 5,
-            totalResperated: 6,
-            usedResperated: 2,
-            usedLast24Hours: 20,
-            alreadyAssigned: 2
-        }
-    ];
-
+    departments$: Observable<DepartmentRow[]>;
+    assignments: {[key: string]: number} = {};
     displayedDepsColumns = ['category', 'A', 'B', 'C', 'D', 'E', 'H'];
 
-    /**
-     * Constructor
-     */
-    constructor() {
-        this.departments$ = of(this.data)
+    constructor(private departmentsService: DepartmentsStatusService,
+                private patientsService: PatientsStatusService) {}
+
+    ngOnInit(): void {
+        this.departments$ = combineLatest(this.departmentsService.getDepartments(), this.patientsService.getPatients())
             .pipe(
-                map(deps => {
-                    const acc = [<DepartmentRow>{ category: 'מיטות'}, <DepartmentRow>{ category: 'מונשמים'},
-                        <DepartmentRow>{ category: 'יממה אחרונה'}, <DepartmentRow>{ category: 'מוקצים'}];
+                map(([deps, patients]) => {
+                    const rows = [<DepartmentRow>{ category: 'מיטות'}, <DepartmentRow>{ category: 'מונשמים'}];
+
                     for (let d of deps) {
-                        acc[0][d.name] = `${d.usedBeds}/${d.totalBeds}`;
-                        acc[1][d.name] = `${d.usedResperated}/${d.totalResperated}`;
-                        acc[2][d.name] = d.usedLast24Hours;
-                        acc[3][d.name] = d.alreadyAssigned;
+                        rows[0][d.name] = rows[0][d.name] || {};
+                        rows[1][d.name] = rows[1][d.name] || {};
+
+                        rows[0][d.name].used = d.emergencyOccupiedBedCount + d.hallwayOccupiedBedCount + d.regularOccupiedBedCount + d.singleOccupiedBedCount;
+                        rows[0][d.name].total = d.totalBedCount;
+
+                        rows[1][d.name].used = d.emergencyOccupiedBedCount;
+                        rows[1][d.name].total = d.emergencyBedCount;
+
+                        this.assignments[d.name] = patients.filter(p => p.department === d.name).length;
                     }
-                    return acc;
+                    return rows;
                 })
             );
     }
-
-    ngOnInit(){}
-
 }

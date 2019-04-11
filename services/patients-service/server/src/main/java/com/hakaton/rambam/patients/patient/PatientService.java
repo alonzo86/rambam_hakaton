@@ -25,7 +25,7 @@ public class PatientService extends GenericResourceService<Patient, PatientRepos
 							.filter(p -> p.getId() == patient.getId())
 							.findFirst();
 					if(!existing.isPresent()) {
-						this.delete(patient.getId());
+						this.create(patient);
 						return;
 					}
 					patient.setDepartment(existing.get().getDepartment());

@@ -18,6 +18,7 @@ import { ResultsComponent } from './results.component';
 import { ResultsService } from './results.service';
 import { RecommendationComponent } from './recommendation/recommendation.component';
 import {DepartmentsComponent} from './departments/departments.component';
+import {DepartmentsStatusService} from './departments/departments.service';
 
 const routes = [
     {
@@ -42,7 +43,7 @@ const routes = [
         MatProgressSpinnerModule,
         FuseSharedModule
     ],
-    providers: [ResultsService],
+    providers: [ResultsService, DepartmentsStatusService],
     exports: [ResultsComponent]
 })
 export class ResultsModule { }

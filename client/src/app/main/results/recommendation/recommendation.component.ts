@@ -36,7 +36,6 @@ export class RecommendationComponent implements OnInit {
     }
 
     getPatientAvatar(patient: IPatientStatus): string {
-        console.log('RecommendationComponent - getPatientAvatar', patient);
         return patient.gender === 'F' ? 'assets/images/avatars/alice.jpg' : 'assets/images/avatars/andrew.jpg';
     }
 

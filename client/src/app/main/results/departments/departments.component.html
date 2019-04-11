@@ -1,49 +1,74 @@
-<div>
-    <div class="top-part">
-        <mat-table *ngIf="departments$ | async as departments" #table [dataSource]="departments">
-            <ng-container matColumnDef="category">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px"></mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.category}}</mat-cell>
-            </ng-container>
+<div class="mat-card mat-elevation-z4 p-24 m-24" fxLayout="column" fxLayoutAlign="start">
+    <mat-table *ngIf="departments$ | async as departments" #table [dataSource]="departments">
+        <ng-container matColumnDef="category">
+            <mat-header-cell *matHeaderCellDef fxFlex="128px" class="cell"></mat-header-cell>
+            <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.category}}</mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="A">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית א</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.A}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="A">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית א ({{assignments.A}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.A.used / row.A.total) * 100 >= 100,
+                                         'mid': (row.A.used / row.A.total) * 100 >= 50 && (row.A.used / row.A.total) * 100 < 100,
+                                         'min': (row.A.used / row.A.total) * 100 < 50}">
+                <div>{{row.A.used}}/{{row.A.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="B">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ב</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.B}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="B">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ב ({{assignments.B}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.B.used / row.B.total) * 100 >= 100,
+                                         'mid': (row.B.used / row.B.total) * 100 >= 50 && (row.B.used / row.B.total) * 100 < 100,
+                                         'min': (row.B.used / row.B.total) * 100 < 50}">
+                <div>{{row.B.used}}/{{row.B.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="C">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ג</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.C}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="C">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ג ({{assignments.C}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.C.used / row.C.total) * 100 >= 100,
+                                         'mid': (row.C.used / row.C.total) * 100 >= 50 && (row.C.used / row.C.total) * 100 < 100,
+                                         'min': (row.C.used / row.C.total) * 100 < 50}">
+                <div>{{row.C.used}}/{{row.C.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="D">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ד</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.D}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="D">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ד ({{assignments.D}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.D.used / row.D.total) * 100 >= 100,
+                                         'mid': (row.D.used / row.D.total) * 100 >= 50 && (row.D.used / row.D.total) * 100 < 100,
+                                         'min': (row.D.used / row.D.total) * 100 < 50}">
+                <div >{{row.D.used}}/{{row.D.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="E">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ה</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.E}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="E">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ה ({{assignments.E}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.E.used / row.E.total) * 100 >= 100,
+                                         'mid': (row.E.used / row.E.total) * 100 >= 50 && (row.E.used / row.E.total) * 100 < 100,
+                                         'min': (row.E.used / row.E.total) * 100 < 50}">
+                <div>{{row.E.used}}/{{row.E.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <ng-container matColumnDef="H">
-                <mat-header-cell *matHeaderCellDef fxFlex="128px">פנימית ח</mat-header-cell>
-                <mat-cell *matCellDef="let row" fxFlex="128px"> {{row.H}}</mat-cell>
-            </ng-container>
+        <ng-container matColumnDef="H">
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ח ({{assignments.H}})</mat-header-cell>
+            <mat-cell *matCellDef="let row" class="cell"
+                      [ngClass]="{'max': (row.H.used / row.H.total) * 100 >= 100,
+                                         'mid': (row.H.used / row.H.total) * 100 >= 50 && (row.H.used / row.H.total) * 100 < 100,
+                                         'min': (row.H.used / row.H.total) * 100 < 50}">
+                <div>{{row.H.used}}/{{row.H.total}}</div>
+            </mat-cell>
+        </ng-container>
 
-            <mat-header-row *matHeaderRowDef="displayedDepsColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedDepsColumns;"
-                     [ngClass]="{'selected' : row == selected}"
-                     matRipple>
-            </mat-row>
-        </mat-table>
-    </div>
-    <div class="table">
-
-    </div>
+        <mat-header-row *matHeaderRowDef="displayedDepsColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedDepsColumns;"
+                 [ngClass]="{'selected' : row == selected}"
+                 matRipple>
+        </mat-row>
+    </mat-table>
 </div>

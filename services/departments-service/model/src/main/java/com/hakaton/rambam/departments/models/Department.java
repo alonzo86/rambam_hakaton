@@ -18,9 +18,11 @@ public class Department {
     private int hallwayFreeBedCount;
     private int hallwayOccupiedBedCount;
     private int hallwayAcceptedLast24Hours;
+    private int hallwayBedCount;
     private int singleFreeBedCount;
     private int singleOccupiedBedCount;
     private int singleAcceptedLast24Hours;
+    private int singleBedCount;
     private int emergencyFreeBedCount;
     private int emergencyOccupiedBedCount;
     private int emergencyAcceptedLast24Hours;
@@ -29,6 +31,7 @@ public class Department {
     private int emergencyCancelledTypeC;
     private int emergencyCancelledTypeD;
     private int emergencyCancelledTypeE;
+    private int emergencyBedCount;
     private int regularFreeBedCount;
     private int regularOccupiedBedCount;
     private int regularAcceptedLast24Hours;
@@ -37,5 +40,6 @@ public class Department {
     private int regularCancelledTypeC;
     private int regularCancelledTypeD;
     private int regularCancelledTypeE;
+    private int regularBedCount;
     private int totalBedCount;
 }

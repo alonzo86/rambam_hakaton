@@ -6,11 +6,7 @@ import com.hakaton.rambam.common.controllers.GenericScrudController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.hakaton.rambam.departments.models.Department;
 
@@ -50,5 +46,12 @@ public class DepartmentController extends GenericScrudController<Department, Dep
     @RequestMapping(value = "/department/search", produces = { "application/json" }, method = RequestMethod.POST)
     public ResponseEntity<List<Department>> search(@RequestBody Department searchCriteria) {
         return super.search(searchCriteria);
+    }
+
+    @Override
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/department/all", produces = { "application/json" }, method = RequestMethod.GET)
+    public ResponseEntity<List<Department>> all() {
+        return super.all();
     }
 }

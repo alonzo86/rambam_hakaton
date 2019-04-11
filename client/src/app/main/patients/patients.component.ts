@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
-import {map} from 'rxjs/operators';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatDialog, MatPaginator, MatTableDataSource, MatDialogConfig} from '@angular/material';
 import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector   : 'patients',
@@ -17,9 +17,11 @@ export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected: boolean;
     currSelected:Array<IPatientStatus> = [];
+    resultsLength = 0;
 
-
+    dataSource: MatTableDataSource<IPatientStatus>;
     public patients$: Observable<IPatientStatus[]>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     displayedColumns = ['selected', 'id', 'department', 'gender', 'previousReleasingDepartment', 'totalTimeInMelrad',
         'waitingTime', 'givenArtificialRespiration', 'nursingComplexityIndependentPatient',
@@ -31,7 +33,8 @@ export class PatientsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.patients$ = this.patientsStatusService.getPatients().pipe(
+        this.patientsStatusService.getPatients()
+            .pipe(
             map(patients => {
                     for (let patient of patients) {
                         patient.selected = false;
@@ -39,7 +42,12 @@ export class PatientsComponent implements OnInit {
                     return patients;
                 }
             )
-        );
+        )
+        .subscribe(res => {
+            this.resultsLength = res.length;
+            this.dataSource = new MatTableDataSource(res);
+            this.dataSource.paginator = this.paginator;
+        });
     }
 
     changeSelection(cg: any , row): boolean {
