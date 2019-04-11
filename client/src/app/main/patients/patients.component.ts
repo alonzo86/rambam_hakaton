@@ -80,6 +80,7 @@ export class PatientsComponent implements OnInit {
             dialogConfig.panelClass  = 'results-form-dialog';
             const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
             dialogRef.componentInstance.close.subscribe(() => {
+                console.log("close");
                 dialogRef.close();
             });
 

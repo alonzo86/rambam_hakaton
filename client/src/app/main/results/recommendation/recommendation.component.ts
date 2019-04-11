@@ -30,6 +30,10 @@ export class RecommendationComponent implements OnInit {
         }
     }
 
+    getPatientName(patient: IPatientStatus): string {
+        return `חולה מס ${patient.id}`;
+    }
+
     getPatientAssistedStatus(patient: IPatientStatus): string {
         if (patient.nursingComplexityNursedPatient) {
             return 'סיעודי';
@@ -51,13 +55,19 @@ export class RecommendationComponent implements OnInit {
     }
 
     getWaitingTimeFormat(patient: IPatientStatus): string {
-        const ms = patient.totalTimeInMelrad * 60 * 1000;
-        const hours = Math.floor(patient.totalTimeInMelrad / 60);
-        const minutes = patient.totalTimeInMelrad - (hours * 60);
+        
+        const hours = Math.floor(patient.totalTimeInMelrad);
+        const minutes = Math.floor((patient.totalTimeInMelrad - hours) * 60);
         
         const strHours = hours.toString().padStart(2, '0');
         const strMinutes = minutes.toString().padStart(2, '0');
         return `${strHours}:${strMinutes}`;
+    }
+
+    getWaitingTimeColor(patient: IPatientStatus): string {
+        if (patient.totalTimeInMelrad > 12) return 'orange';
+        if (patient.totalTimeInMelrad > 24) return 'red';
+        return 'green';
     }
 
     onAssignmentChange(data: MatSelectChange, patient: IPatientStatus) {

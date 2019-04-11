@@ -9,6 +9,7 @@
     </mat-toolbar>
 
     <mat-dialog-content>
-        <results [showHeader]="false" [allPatients]="allPatients" [selectedPatients]="selectedPatients" [departments]="departments"></results>
+        <results [showHeader]="false" [allPatients]="allPatients" [selectedPatients]="selectedPatients" [departments]="departments" 
+        (approve)="onApprove()" (reject)="onReject()"></results>
     </mat-dialog-content>
 </div>
