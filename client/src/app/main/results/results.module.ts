@@ -3,7 +3,17 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-import { MatButtonModule, MatIconModule, MatTabsModule, MatRippleModule, MatSlideToggleModule, MatTableModule, MatSelectModule, MatInputModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatRippleModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatSelectModule,
+    MatInputModule,
+    MatProgressSpinnerModule
+} from '@angular/material';
 import { ResultsComponent } from './results.component';
 import { ResultsService } from './results.service';
 import { RecommendationComponent } from './recommendation/recommendation.component';
@@ -29,6 +39,7 @@ const routes = [
         MatSlideToggleModule,
         MatTableModule,
         MatTabsModule,
+        MatProgressSpinnerModule,
         FuseSharedModule
     ],
     providers: [ResultsService],

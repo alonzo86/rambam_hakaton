@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IPatientStatus } from '../sample/sample.model';
 import { Observable, from, of } from 'rxjs';
+import {delay} from "rxjs/operators";
 
 @Injectable()
 export class ResultsService {
@@ -15,7 +16,7 @@ export class ResultsService {
             newPatients.push(clone);
         }
 
-        return of(newPatients);
+        return of(newPatients).pipe(delay(3000  ));
     }
     
 }
