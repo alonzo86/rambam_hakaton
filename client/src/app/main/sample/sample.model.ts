@@ -25,6 +25,35 @@ export interface IPatientStatus {
     selected: boolean;
 }
 
+export interface IDepartmentStatus {
+    id: number;
+    name: string;
+    hallwayFreeBedCount: number;
+    hallwayOccupiedBedCount: number;
+    hallwayAcceptedLast24Hours: number;
+    singleFreeBedCount: number;
+    singleOccupiedBedCount: number;
+    singleAcceptedLast24Hours: number;
+    emergencyBedCount: number;
+    emergencyFreeBedCount: number;
+    emergencyOccupiedBedCount: number;
+    emergencyAcceptedLast24Hours: number;
+    emergencyCancelledTypeA: number;
+    emergencyCancelledTypeB: number;
+    emergencyCancelledTypeC: number;
+    emergencyCancelledTypeD: number;
+    emergencyCancelledTypeE: number;
+    regularFreeBedCount: number;
+    regularOccupiedBedCount: number;
+    regularAcceptedLast24Hours: number;
+    regularCancelledTypeA: number;
+    regularCancelledTypeB: number;
+    regularCancelledTypeC: number;
+    regularCancelledTypeD: number;
+    regularCancelledTypeE: number;
+    totalBedCount: number;
+}
+
 export interface IUnitStatus {
     unitid: string;
     name: string;

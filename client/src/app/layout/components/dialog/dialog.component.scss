@@ -1,4 +1,31 @@
 .top-part {
-    width: 60em;
-    margin-right: 6em;
+    width: 62em;
+    margin-right: 8em;
+}
+
+.cell {
+    display: block;
+    text-align: center;
+    padding-top: 1em;
+}
+
+.min {
+    ::ng-deep div {
+        color: green;
+        font-weight: bold;
+    }
+}
+
+.mid {
+    ::ng-deep div {
+        color: orange;
+        font-weight: bold;
+    }
+}
+
+.max {
+    ::ng-deep div {
+        color: darkred;
+        font-weight: bold;
+    }
 }
