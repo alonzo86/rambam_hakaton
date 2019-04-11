@@ -22,7 +22,7 @@
             <ng-container matColumnDef="selected">
                 <mat-header-cell *matHeaderCellDef fxFlex="128px">
                     <mat-checkbox (click)="$event.stopPropagation()"
-                                  (change)="selectAll(patients)"
+                                  (change)="selectAll(dataSource.data)"
                                   [checked]="allSelected">
                     </mat-checkbox>
                     </mat-header-cell>
