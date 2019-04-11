@@ -6,6 +6,7 @@ import {PatientsStatusService} from './patients.service';
 import {map} from 'rxjs/operators';
 import {MatDialog} from '@angular/material';
 import {DialogComponent} from '../../layout/components/dialog/dialog.component';
+import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
 
 @Component({
     selector   : 'patients',
@@ -47,9 +48,9 @@ export class PatientsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(DialogComponent, {
-            width: '80em',
-            height: '40em',
+        const dialogRef = this.dialog.open(ResultsDialogComponent, {
+            width: '90em',
+            height: '55em',
             data: {
                 patients: []
             }

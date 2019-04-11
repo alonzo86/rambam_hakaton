@@ -11,6 +11,7 @@ import { ResultsService } from './results.service';
 export class ResultsComponent implements OnInit {
     
     @Input() patients: IPatientStatus[];
+    @Input() showHeader = false;
 
     recommendedPatientsStatus$: Observable<IPatientStatus[]>;
     
