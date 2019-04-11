@@ -1,4 +1,4 @@
-import { ContainerDialogComponent } from './dialog/container-dialog.component';
+
 import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import { MatDialog } from '@angular/material';
@@ -20,8 +20,5 @@ export class SampleComponent implements OnInit
 
     onClick() {
         console.log('test');
-        this.dialog.open(ContainerDialogComponent, {
-            width: '750px',
-        });
     }
 }

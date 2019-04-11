@@ -9,7 +9,6 @@ import { SampleComponent } from './sample.component';
 import { UnitStatusComponent } from './unit-status/unit-status.component';
 import { UnitStatusService } from './sample.service';
 import { ResultsModule } from '../results/results.module';
-import { ContainerDialogComponent } from './dialog/container-dialog.component';
 
 const routes = [
     {
@@ -21,8 +20,7 @@ const routes = [
 @NgModule({
     declarations: [
         SampleComponent,
-        UnitStatusComponent,
-        ContainerDialogComponent
+        UnitStatusComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -44,9 +42,6 @@ const routes = [
     ],
     exports     : [
         SampleComponent
-    ],
-    entryComponents: [
-        ContainerDialogComponent
     ]
 })
 
