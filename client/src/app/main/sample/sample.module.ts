@@ -1,12 +1,14 @@
+import { DialogModule } from './../../layout/components/dialog/dialog.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-import { MatButtonModule, MatIconModule, MatTabsModule, MatRippleModule, MatSlideToggleModule, MatTableModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatTabsModule, MatRippleModule, MatSlideToggleModule, MatTableModule, MatDialogModule } from '@angular/material';
 import { SampleComponent } from './sample.component';
 import { UnitStatusComponent } from './unit-status/unit-status.component';
 import { UnitStatusService } from './sample.service';
+import { ResultsModule } from '../results/results.module';
 
 const routes = [
     {
@@ -30,7 +32,10 @@ const routes = [
         MatSlideToggleModule,
         MatTableModule,
         MatTabsModule,
-        FuseSharedModule
+        MatDialogModule,
+        FuseSharedModule,
+        DialogModule,
+        ResultsModule
     ],
     providers: [
         UnitStatusService
