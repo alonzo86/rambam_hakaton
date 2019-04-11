@@ -1,11 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
-import {map} from 'rxjs/operators';
-import {MatDialog} from '@angular/material';
-import {DialogComponent} from '../../layout/components/dialog/dialog.component';
+import {map, tap} from 'rxjs/operators';
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
 
 @Component({
@@ -17,9 +16,11 @@ import { ResultsDialogComponent } from './results-dialog/results-dialog.componen
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected: boolean;
+    resultsLength = 0;
 
-
+    dataSource: MatTableDataSource<IPatientStatus>;
     public patients$: Observable<IPatientStatus[]>;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     displayedColumns = ['selected', 'id', 'department', 'gender', 'previousReleasingDepartment', 'totalTimeInMelrad',
         'waitingTime', 'givenArtificialRespiration', 'nursingComplexityIndependentPatient',
@@ -31,7 +32,8 @@ export class PatientsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.patients$ = this.patientsStatusService.getPatients().pipe(
+        this.patientsStatusService.getPatients()
+            .pipe(
             map(patients => {
                     for (let patient of patients) {
                         patient.selected = false;
@@ -39,7 +41,12 @@ export class PatientsComponent implements OnInit {
                     return patients;
                 }
             )
-        );
+        )
+        .subscribe(res => {
+            this.resultsLength = res.length;
+            this.dataSource = new MatTableDataSource(res);
+            this.dataSource.paginator = this.paginator;
+        });
     }
 
     changeSelection(cg: any , row): boolean {

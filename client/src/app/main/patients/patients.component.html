@@ -14,7 +14,7 @@
     <!-- CONTENT -->
     <div class="content">
 
-        <mat-table *ngIf="patients$ | async as patients" #table [dataSource]="patients">
+        <mat-table *ngIf="dataSource" #table [dataSource]="dataSource">
 
             <ng-container matColumnDef="selected">
                 <mat-header-cell *matHeaderCellDef fxFlex="128px">
@@ -103,6 +103,7 @@
         </mat-table>
 
     </div>
-    <!-- / CONTENT -->
+
+    <mat-paginator [length]="resultsLength" [pageSize]="10"></mat-paginator>
 
 </div>
