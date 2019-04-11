@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IPatientStatus } from 'app/main/sample/sample.model';
 import { MatSelectChange } from '@angular/material';
 
@@ -9,6 +9,10 @@ import { MatSelectChange } from '@angular/material';
 })
 export class RecommendationComponent implements OnInit {
     @Input() patients: IPatientStatus[];
+
+    @Output() approve = new EventEmitter();
+    @Output() reject = new EventEmitter();
+    
     requireComment = false;
     comment = '';
     displayedColumns = ['avatar', 'id', 'name', 'p1', 'p2', 'department', 'assignment', 'buttons'];
@@ -64,11 +68,11 @@ export class RecommendationComponent implements OnInit {
     }
 
     onApprove() {
-
+        this.approve.emit();
     }
 
     onReject() {
-        
+        this.reject.emit();
     }
 
     onReset(event: any, patient: IPatientStatus) {
