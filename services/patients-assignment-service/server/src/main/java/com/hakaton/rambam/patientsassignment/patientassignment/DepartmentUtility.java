@@ -22,7 +22,7 @@ public class DepartmentUtility{
 
             //get number of patients waiting for the same bed in current department
             long waitingListSize = waitingList.stream()
-                    .filter(p -> p.getAssigndDepartment().getId() == department.getId()
+                    .filter(p -> p.getAssigndDepartment() == department.getName()
                             && p.getBedType() == TargetBedType )
                 .count();
             long score = standard/(occupied + maxStandard);
