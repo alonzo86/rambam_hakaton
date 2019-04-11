@@ -4,6 +4,7 @@ import com.hakaton.rambam.departments.models.Department;
 import com.hakaton.rambam.patients.models.BedTypeEnum;
 import com.hakaton.rambam.patients.models.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DepartmentUtility {
@@ -17,14 +18,18 @@ public class DepartmentUtility {
         Department bestDepartment = null;
 
         BedTypeEnum bedType = decideBedType(patient);
+        List<Department> availableDepartments = new ArrayList<>();
         // for normalization
         long maxWaitingListSize = 0;
         int maxLast24Hours = 0;
         double maxOccupencyPercentage = 0;
         for (Department department : departmentList) {
+            int std = getStandard(department, bedType);
+            if (std == 0) continue;
+            availableDepartments.add(department); // filter out departments with no available beds of required type
+
             maxLast24Hours = Math.max(maxLast24Hours, getLast24Hours(department));
-            maxOccupencyPercentage = Math.max(maxOccupencyPercentage,
-                    getStandard(department, bedType) == 0 ? 0 : getOccupied(department, bedType) / getStandard(department, bedType));
+            maxOccupencyPercentage = Math.max(maxOccupencyPercentage, getOccupied(department, bedType) / getStandard(department, bedType));
 
             maxWaitingListSize = Math.max(maxWaitingListSize, waitingList.stream()
                     .filter(p -> p.getDepartment() != null && p.getDepartment().equals(department.getName()))
@@ -32,7 +37,7 @@ public class DepartmentUtility {
         }
 
         // calculate department score
-        for (Department department : departmentList) {
+        for (Department department : availableDepartments) {
             double normalizedOccupancyPercentage = getOccupied(department, bedType) *  maxOccupencyPercentage / getStandard(department, bedType);
             double normalizedLast24Hours = getLast24Hours(department) / maxLast24Hours;
             //get number of patients waiting for the same bed in current department
