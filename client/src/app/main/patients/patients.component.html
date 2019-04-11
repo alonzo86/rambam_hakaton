@@ -1,13 +1,16 @@
 <div class="page-layout simple tabbed">
 
     <!-- HEADER -->
-    <div class="header accent p-24">
-        <div class="flex-container">
-            <h2>רשימת מטופלים</h2>
-            <div class="example-button-row appButton">
+    <div class="header accent p-24" fxLayout="column" fxLayoutAlign="center center"
+    fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="space-between center">
+    <div class="logo mb-24 mb-md-0"
+    fxLayout="row" fxLayoutAlign="start center"><span class="mat-title">רשימת מטופלים</span>   </div>
+            <!-- <div class="example-button-row appButton">
                 <button mat-stroked-button color="accent" style="color:white" (click)="openDialog()" >המלצות</button>
-            </div>
-        </div>
+            </div> -->
+            <button mat-raised-button class="add-product-button fuse-white mt-24 mt-md-0" (click)="openDialog()">
+                <span>הצג המלצה</span>
+            </button>
     </div>
     <!-- / HEADER -->
 
@@ -42,15 +45,15 @@
             </ng-container>
 
             <ng-container matColumnDef="previousReleasingDepartment">
-                <mat-header-cell *matHeaderCellDef>מחלקה משחררת באשפוז הקודם</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>מחלקה באשפוז הקודם</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.previousReleasingDepartment === 'A' ? 'פנימית א' : row.previousReleasingDepartment === 'B' ? 'פנימית ב' :  row.previousReleasingDepartment === 'C' ? 'פנימית ג' : row.previousReleasingDepartment === 'D' ? 'פנימית ד' : row.previousReleasingDepartment === 'E' ? 'פנימית ה' : row.previousReleasingDepartment === 'H' ? 'פנימית ח' : ''}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="totalTimeInMelrad">
-                <mat-header-cell *matHeaderCellDef>סה"כ זמן שהיה במלרד (שעות)</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>זמן שהיה במלרד</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.totalTimeInMelrad}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="waitingTime">
-                <mat-header-cell *matHeaderCellDef>זמן המתנה מחתימה על אשפוז לפנימיות (שעות)</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>זמן המתנה מחתימה</mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{row.waitingTime}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="givenArtificialRespiration">
