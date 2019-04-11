@@ -2,17 +2,25 @@
 
     <!-- HEADER -->
     <div *ngIf="showHeader" class="header accent p-24">
-        <h2>המלצת שיבוץ</h2> 
+        <h2>המלצת שיבוץ</h2>
     </div>
     <!-- / HEADER -->
 
     <!-- CONTENT -->
-    <div class="content">
 
-        <departments></departments>
-        <recommendation *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus"
-                        [patients]="recommendedPatientsStatus">
-        </recommendation>
+    <div class="content">
+        <ng-container *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus; else loading">
+            <departments></departments>
+            <recommendation [patients]="recommendedPatientsStatus">
+            </recommendation>
+        </ng-container>
+        <ng-template #loading>
+            <div style="width:154px;margin:23rem auto;">
+                <mat-spinner class="spinner"></mat-spinner>
+                <p style="padding-right: 44px">   מחשב המלצה ...</p>
+            </div>
+
+        </ng-template>
 
 
     </div>

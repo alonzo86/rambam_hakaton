@@ -3,9 +3,9 @@ import { fuseAnimations } from '@fuse/animations';
 import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
-import {map, tap} from 'rxjs/operators';
-import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatTableDataSource, MatDialogConfig} from '@angular/material';
 import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector   : 'patients',
@@ -16,6 +16,7 @@ import { ResultsDialogComponent } from './results-dialog/results-dialog.componen
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected: boolean;
+    currSelected:Array<IPatientStatus> = [];
     resultsLength = 0;
 
     dataSource: MatTableDataSource<IPatientStatus>;
@@ -51,17 +52,26 @@ export class PatientsComponent implements OnInit {
 
     changeSelection(cg: any , row): boolean {
         this.allSelected = false;
+        if(cg.checked) {
+            this.currSelected.push(row);
+        }else {
+            this.currSelected.forEach( (item, index) => {
+                if(item === row) this.currSelected.splice(index,1);
+            });
+        }
         return row.selected = cg.checked;
     }
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(ResultsDialogComponent, {
-            width: '90em',
-            height: '55em',
-            data: {
-                patients: []
-            }
-        });
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            patients:this.currSelected
+        };
+        dialogConfig.width = '90em';
+        dialogConfig.height = '55em';
+        const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -72,6 +82,11 @@ export class PatientsComponent implements OnInit {
         this.allSelected = !this.allSelected;
         for (let patient of patients) {
             patient.selected = this.allSelected;
+        }
+        if(this.allSelected){
+            this.currSelected = patients;
+        } else {
+            this.currSelected = [];
         }
     }
 }
