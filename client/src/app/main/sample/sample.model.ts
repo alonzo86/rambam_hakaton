@@ -7,6 +7,7 @@ export interface IUnitCapacity {
 
 export interface IPatientStatus {
     id: string;
+    name: string;
     department: string;
     assignment: string;
     gender: string;

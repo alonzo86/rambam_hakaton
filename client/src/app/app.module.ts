@@ -18,8 +18,8 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
 import {PatientsModule} from './main/patients/patients.module';
-import {DialogModule} from "./layout/components/dialog/dialog.module";
-import {ResultsModule} from "./main/results/results.module";
+import {DialogModule} from './layout/components/dialog/dialog.module';
+import {ResultsModule} from './main/results/results.module';
 
 const appRoutes: Routes = [
     {

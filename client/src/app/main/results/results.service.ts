@@ -7,11 +7,15 @@ export class ResultsService {
 
     getResultsFromRecommendationService(patients: IPatientStatus[]): Observable<IPatientStatus[]> {
 
+        let newPatients: IPatientStatus[];
+        newPatients = [];
         for (const patient of patients) {
-            patient.assignment = 'A';
+            const clone = Object.assign({}, patient);
+            clone.assignment = 'A';
+            newPatients.push(clone);
         }
 
-        return of(patients);
+        return of(newPatients);
     }
     
 }
