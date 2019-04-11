@@ -86,6 +86,21 @@ export class PatientsComponent implements OnInit {
 
             dialogRef.afterClosed().subscribe(result => {
                 console.log(`Dialog result: ${result}`);
+                this.patientsStatusService.getPatients()
+                    .pipe(
+                        map(patients => {
+                                for (let patient of patients) {
+                                    patient.selected = false;
+                                }
+                                return patients;
+                            }
+                        )
+                    )
+                    .subscribe(res => {
+                        this.resultsLength = res.length;
+                        this.dataSource = new MatTableDataSource(res);
+                        this.dataSource.paginator = this.paginator;
+                    });
             });
         });
     }

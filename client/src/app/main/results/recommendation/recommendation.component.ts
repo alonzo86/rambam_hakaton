@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IPatientStatus } from 'app/main/sample/sample.model';
 import { MatSelectChange } from '@angular/material';
+import {PatientsStatusService} from '../../patients/patients.service';
+import {HttpClient} from '@angular/common/http';
+import {PATIENTS_SERVICE} from '../../constants';
 
 @Component({
   selector: 'recommendation',
@@ -18,7 +21,7 @@ export class RecommendationComponent implements OnInit {
     displayedColumns = ['avatar', 'id', 'name', 'p1', 'p2', 'department', 'assignment', 'buttons'];
 
     private originalData: IPatientStatus[];
-    constructor() { }
+    constructor(private _httpClient: HttpClient) { }
     
     ngOnInit() {
         console.log('RecommendationComponent - ngOnInit', this.patients);
@@ -78,7 +81,8 @@ export class RecommendationComponent implements OnInit {
     }
 
     onApprove() {
-        this.approve.emit();
+        this.patients[0].department = this.patients[0].assigndDepartment;
+        return this._httpClient.put(`${PATIENTS_SERVICE}/patient/${this.patients[0].id}`, this.patients[0]).subscribe(res => this.approve.emit());
     }
 
     onReject() {

@@ -38,6 +38,7 @@ public class PatientController extends GenericScrudController<Patient, PatientSe
     }
 
     @Override
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/patient/{id}", produces = { "application/json" }, consumes = { "application/json" }, method = RequestMethod.PUT)
     public ResponseEntity<Patient> update(@PathVariable("id") long id, @RequestBody Patient patient) {
         return super.update(id, patient);
