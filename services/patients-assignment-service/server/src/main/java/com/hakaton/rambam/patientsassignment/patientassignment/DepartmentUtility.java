@@ -32,18 +32,21 @@ public class DepartmentUtility {
             maxOccupencyPercentage = Math.max(maxOccupencyPercentage, getOccupied(department, bedType) / getStandard(department, bedType));
 
             maxWaitingListSize = Math.max(maxWaitingListSize, waitingList.stream()
-                    .filter(p -> p.getDepartment() != null && p.getDepartment().equals(department.getName()))
+                    .filter(p -> department.getName().equals(p.getDepartment())
+                            || (p.getDepartment() == null && department.getName().equals(p.getAssigndDepartment())))
                     .count());
         }
 
         // calculate department score
         for (Department department : availableDepartments) {
-            double normalizedOccupancyPercentage = getOccupied(department, bedType) *  maxOccupencyPercentage / getStandard(department, bedType);
+            double normalizedOccupancyPercentage = getOccupied(department, bedType) * maxOccupencyPercentage / getStandard(department, bedType);
             double normalizedLast24Hours = getLast24Hours(department) / maxLast24Hours;
             //get number of patients waiting for the same bed in current department
-            double normalizedWaitingListSize = waitingList.stream()
-                    .filter(p -> p.getDepartment() != null && p.getDepartment().equals(department.getName()))
-                    .count() / maxWaitingListSize;
+            long waitingListSize = waitingList.stream()
+                    .filter(p -> department.getName().equals(p.getDepartment())
+                            || (p.getDepartment() == null && department.getName().equals(p.getAssigndDepartment())))
+                    .count();
+            double normalizedWaitingListSize = waitingListSize / maxWaitingListSize;
 
             double score = normalizedLast24Hours * last24HoursWeight
                     + normalizedOccupancyPercentage * occupancyPercentageWeight
