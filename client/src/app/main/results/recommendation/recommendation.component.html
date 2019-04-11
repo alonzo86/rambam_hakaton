@@ -1,1 +1,98 @@
-<p>טבלת התוצאות תהיה פה!</p>
+<div class="mat-card mat-elevation-z4 p-24 m-24" fxLayout="column" fxLayoutAlign="start">
+    <mat-table #table [dataSource]="patients">
+
+        <!-- Avatar Column -->
+        <ng-container matColumnDef="avatar">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <img class="avatar" [alt]="patient.name" [src]="getPatientAvatar(patient)" />
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef>תעודה מזהה</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <p class="text-truncate font-weight-600">{{patient.id}}</p>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>שם החולה</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <p class="text-truncate font-weight-600">{{patient.name}}</p>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="p1">
+            <mat-header-cell *matHeaderCellDef>זמן המתנה</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <p class="email text-truncate">
+                    {{getWaitingTimeFormat(patient)}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Phone Column -->
+        <ng-container matColumnDef="p2">
+            <mat-header-cell *matHeaderCellDef>סיוע</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <p class="phone text-truncate">
+                    {{getPatientAssistedStatus(patient)}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Job Title Column -->
+        <ng-container matColumnDef="department">
+            <mat-header-cell *matHeaderCellDef>שיבוץ קודם</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <p class="job-title text-truncate">
+                    {{getCurrentDepartmentName(patient)}}
+                </p>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Company Column -->
+        <ng-container matColumnDef="assignment">
+            <mat-header-cell *matHeaderCellDef>המלצה</mat-header-cell>
+            <mat-cell *matCellDef="let patient">
+                <mat-select [(value)]="patient.assignment" (selectionChange)="onAssignmentChange($event, patient)">
+                    <mat-option>ללא שיבוץ</mat-option>
+                    <mat-option value="A">א</mat-option>
+                    <mat-option value="B">ב</mat-option>
+                    <mat-option value="C">ג</mat-option>
+                    <mat-option value="D">ד</mat-option>
+                    <mat-option value="H">ח</mat-option>
+                </mat-select>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let patient; columns: displayedColumns;" class="patient">
+        </mat-row>
+    </mat-table>
+</div>
+
+<div *ngIf="requireComment" class="mat-card mat-elevation-z4 p-24 m-24" fxLayout="column" fxLayoutAlign="start">
+    <mat-form-field appearance="outline" class="example-full-width">
+        <input matInput #message maxlength="256" placeholder="הערה" ([ngModel])="comment">
+        <mat-hint align="start"><strong>יש לכתוב הערה לגבי השינוי שבוצע ומי אישר</strong> </mat-hint>
+        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+</div>
+
+<div class="p-24 m-24" fxLayout="row" fxLayoutAlign="end">
+    <button mat-raised-button
+        class="mat-primary recommend-dialog-button"
+        (click)="onReject()"
+        aria-label="ביטול"> ביטול
+    </button>
+
+    <button mat-raised-button
+        class="mat-accent recommend-dialog-button"
+        (click)="onApprove()"
+        aria-label="אישור"> אישור
+    </button>
+    
+</div>

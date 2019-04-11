@@ -3,11 +3,10 @@ import { fuseAnimations } from '@fuse/animations';
 import {Observable} from 'rxjs';
 import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
-import {map} from "rxjs/operators";
-import {SelectionModel} from "@angular/cdk/typings/esm5/collections";
-import {MatDialog, MatDialogConfig} from "@angular/material";
-import {DialogComponent} from "../../layout/components/dialog/dialog.component";
-
+import {map} from 'rxjs/operators';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../layout/components/dialog/dialog.component';
+import { ResultsDialogComponent } from './results-dialog/results-dialog.component';
 
 @Component({
     selector   : 'patients',
@@ -65,7 +64,7 @@ export class PatientsComponent implements OnInit {
         };
         dialogConfig.width = '80em';
         dialogConfig.height = '40em';
-        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+        const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
