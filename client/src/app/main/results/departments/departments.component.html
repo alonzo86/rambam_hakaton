@@ -6,62 +6,74 @@
         </ng-container>
 
         <ng-container matColumnDef="A">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית א ({{assignments.A}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית א   ({{assignments.A}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.A.used / row.A.total) * 100 >= 100,
                                          'mid': (row.A.used / row.A.total) * 100 >= 50 && (row.A.used / row.A.total) * 100 < 100,
                                          'min': (row.A.used / row.A.total) * 100 < 50}">
-                <div>{{row.A.used}}/{{row.A.total}}</div>
+                <div class="number-wrapper" *ngIf="row.A.total > 0">
+                    <div class="content">{{row.A.used}}/{{row.A.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="B">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית ב ({{assignments.B}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ב   ({{assignments.B}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.B.used / row.B.total) * 100 >= 100,
                                          'mid': (row.B.used / row.B.total) * 100 >= 50 && (row.B.used / row.B.total) * 100 < 100,
                                          'min': (row.B.used / row.B.total) * 100 < 50}">
-                <div>{{row.B.used}}/{{row.B.total}}</div>
+                <div class="number-wrapper" *ngIf="row.B.total > 0">
+                    <div class="content">{{row.B.used}}/{{row.B.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="C">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית ג ({{assignments.C}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ג   ({{assignments.C}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.C.used / row.C.total) * 100 >= 100,
                                          'mid': (row.C.used / row.C.total) * 100 >= 50 && (row.C.used / row.C.total) * 100 < 100,
                                          'min': (row.C.used / row.C.total) * 100 < 50}">
-                <div>{{row.C.used}}/{{row.C.total}}</div>
+                <div class="number-wrapper" *ngIf="row.C.total > 0">
+                    <div class="content">{{row.C.used}}/{{row.C.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="D">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית ד ({{assignments.D}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ד   ({{assignments.D}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.D.used / row.D.total) * 100 >= 100,
                                          'mid': (row.D.used / row.D.total) * 100 >= 50 && (row.D.used / row.D.total) * 100 < 100,
                                          'min': (row.D.used / row.D.total) * 100 < 50}">
-                <div >{{row.D.used}}/{{row.D.total}}</div>
+                <div class="number-wrapper" *ngIf="row.D.total > 0">
+                    <div class="content">{{row.D.used}}/{{row.D.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="E">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית ה ({{assignments.E}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ה   ({{assignments.E}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.E.used / row.E.total) * 100 >= 100,
                                          'mid': (row.E.used / row.E.total) * 100 >= 50 && (row.E.used / row.E.total) * 100 < 100,
                                          'min': (row.E.used / row.E.total) * 100 < 50}">
-                <div>{{row.E.used}}/{{row.E.total}}</div>
+                <div class="number-wrapper" *ngIf="row.E.total > 0">
+                    <div class="content">{{row.E.used}}/{{row.E.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="H">
-            <mat-header-cell *matHeaderCellDef class="cell">פנימית ח ({{assignments.H}})</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class="cell">פנימית ח   ({{assignments.H}})</mat-header-cell>
             <mat-cell *matCellDef="let row" class="cell"
                       [ngClass]="{'max': (row.H.used / row.H.total) * 100 >= 100,
                                          'mid': (row.H.used / row.H.total) * 100 >= 50 && (row.H.used / row.H.total) * 100 < 100,
                                          'min': (row.H.used / row.H.total) * 100 < 50}">
-                <div>{{row.H.used}}/{{row.H.total}}</div>
+                <div class="number-wrapper" *ngIf="row.H.total > 0">
+                    <div class="content">{{row.H.used}}/{{row.H.total}}</div>
+                </div>
             </mat-cell>
         </ng-container>
 

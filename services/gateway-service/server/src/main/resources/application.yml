@@ -16,6 +16,8 @@ zuul:
       path: /hakaton-rambam-patients-service/**
     hakaton-rambam-departments-service:
       path: /hakaton-rambam-departments-service/**
+    hakaton-rambam-patients-assignment-service:
+      path: /hakaton-rambam-patients-assignment-service/**
   host:
     socket-timeout-millis: 30000
 feign:

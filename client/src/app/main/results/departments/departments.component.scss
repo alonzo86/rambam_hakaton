@@ -5,22 +5,43 @@
 }
 
 .min {
-    ::ng-deep div {
-        color: green;
-        font-weight: bold;
+    ::ng-deep .number-wrapper {
+        padding-right: 3em;
+        .content {
+            background: rgba(0, 128, 0, 0.2);
+            color: green;
+            font-weight: bold;
+            width: 6em;
+            height: 2em;
+            padding-top: 0.4em;
+        }
     }
 }
 
 .mid {
-    ::ng-deep div {
-        color: orange;
-        font-weight: bold;
+    ::ng-deep .number-wrapper {
+        padding-right: 3em;
+        .content {
+            background: rgba(255, 165, 0, 0.2);
+            color: orange;
+            font-weight: bold;
+            width: 6em;
+            height: 2em;
+            padding-top: 0.4em;
+        }
     }
 }
 
 .max {
-    ::ng-deep div {
-        color: darkred;
-        font-weight: bold;
+    ::ng-deep .number-wrapper {
+        padding-right: 3em;
+        .content {
+            background: rgba(139, 0, 0, 0.2);
+            color: darkred;
+            font-weight: bold;
+            width: 6em;
+            height: 2em;
+            padding-top: 0.4em;
+        }
     }
 }
