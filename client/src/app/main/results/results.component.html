@@ -11,7 +11,8 @@
     <div class="content">
         <ng-container *ngIf="recommendedPatientsStatus$ | async as recommendedPatientsStatus; else loading">
             <departments></departments>
-            <recommendation [patients]="recommendedPatientsStatus">
+            <recommendation [patients]="recommendedPatientsStatus"
+                (approve)="onApprove()" (reject)="onReject()">
             </recommendation>
         </ng-container>
         <ng-template #loading>

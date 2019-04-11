@@ -9,9 +9,15 @@ import java.util.List;
 
 public class DepartmentUtility {
 
-    static private double last24HoursWeight = 1;
-    static private double waitingListSizeWeight = 1;
-    static private double occupancyPercentageWeight = 1;
+    /*Logger logger = Logger.getLogger(DepartmentUtility.class.getName());
+    FileHandler fh;
+
+    DepartmentUtility() throws IOException {
+        fh = new FileHandler("./department.log");
+        logger.addHandler(fh);
+        SimpleFormatter formatter = new SimpleFormatter();
+        fh.setFormatter(formatter);
+    }*/
 
     Department getBestDepartment(List<Department> departmentList, List<Patient> waitingList, Patient patient) {
         double minScore = Double.MAX_VALUE;
@@ -40,17 +46,17 @@ public class DepartmentUtility {
         // calculate department score
         for (Department department : availableDepartments) {
             double normalizedOccupancyPercentage = getOccupied(department, bedType) * maxOccupencyPercentage / getStandard(department, bedType);
-            double normalizedLast24Hours = getLast24Hours(department) / maxLast24Hours;
+            double normalizedLast24Hours = maxLast24Hours == 0 ? 0 : getLast24Hours(department) / maxLast24Hours;
             //get number of patients waiting for the same bed in current department
-            long waitingListSize = maxWaitingListSize==0?0: waitingList.stream()
+            long waitingListSize = maxWaitingListSize == 0 ? 0 : waitingList.stream()
                     .filter(p -> department.getName().equals(p.getDepartment())
                             || (p.getDepartment() == null && department.getName().equals(p.getAssigndDepartment())))
                     .count();
-            double normalizedWaitingListSize = waitingListSize / maxWaitingListSize;
+            double normalizedWaitingListSize = maxWaitingListSize == 0 ? 0 : waitingListSize / maxWaitingListSize;
 
-            double score = normalizedLast24Hours * last24HoursWeight
-                    + normalizedOccupancyPercentage * occupancyPercentageWeight
-                    + normalizedWaitingListSize * waitingListSizeWeight;
+            double score = normalizedLast24Hours * Weights.last24HoursWeight
+                    + normalizedOccupancyPercentage * Weights.occupancyPercentageWeight
+                    + normalizedWaitingListSize * Weights.waitingListSizeWeight;
             if (minScore > score) {
                 bestDepartment = department;
                 minScore = score;

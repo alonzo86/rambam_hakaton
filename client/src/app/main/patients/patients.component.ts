@@ -17,6 +17,7 @@ import {DepartmentsStatusService} from '../results/departments/departments.servi
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected: boolean;
+    currSelected:Array<IPatientStatus> = [];
     resultsLength = 0;
 
     dataSource: MatTableDataSource<IPatientStatus>;
@@ -54,6 +55,13 @@ export class PatientsComponent implements OnInit {
 
     changeSelection(cg: any , row): boolean {
         this.allSelected = false;
+        if(cg.checked) {
+            this.currSelected.push(row);
+        }else {
+            this.currSelected.forEach( (item, index) => {
+                if(item === row) this.currSelected.splice(index,1);
+            });
+        }
         return row.selected = cg.checked;
     }
 
@@ -71,6 +79,10 @@ export class PatientsComponent implements OnInit {
             dialogConfig.height = '58em';
             dialogConfig.panelClass  = 'results-form-dialog';
             const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
+            dialogRef.componentInstance.close.subscribe(() => {
+                console.log("close");
+                dialogRef.close();
+            });
 
             dialogRef.afterClosed().subscribe(result => {
                 console.log(`Dialog result: ${result}`);
@@ -83,5 +95,15 @@ export class PatientsComponent implements OnInit {
         for (let patient of patients) {
             patient.selected = this.allSelected;
         }
+        if(this.allSelected){
+            this.currSelected = patients;
+        } else {
+            this.currSelected = [];
+        }
     }
 }
+
+
+
+
+

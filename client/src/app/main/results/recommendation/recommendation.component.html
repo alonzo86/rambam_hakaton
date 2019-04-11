@@ -19,7 +19,7 @@
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef>שם החולה</mat-header-cell>
             <mat-cell *matCellDef="let patient">
-                <p class="text-truncate font-weight-600">{{patient.name}}</p>
+                <p class="text-truncate font-weight-600">{{getPatientName(patient)}}</p>
             </mat-cell>
         </ng-container>
 
@@ -27,7 +27,7 @@
         <ng-container matColumnDef="p1">
             <mat-header-cell *matHeaderCellDef>זמן המתנה</mat-header-cell>
             <mat-cell *matCellDef="let patient">
-                <p class="email text-truncate">
+                <p class="email text-truncate" [ngStyle]="{'color': getWaitingTimeColor(patient)}">
                     {{getWaitingTimeFormat(patient)}}
                 </p>
             </mat-cell>

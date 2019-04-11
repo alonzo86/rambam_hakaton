@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { IPatientStatus } from 'app/main/sample/sample.model';
 import { MatSelectChange } from '@angular/material';
 
@@ -9,6 +9,10 @@ import { MatSelectChange } from '@angular/material';
 })
 export class RecommendationComponent implements OnInit {
     @Input() patients: IPatientStatus[];
+
+    @Output() approve = new EventEmitter();
+    @Output() reject = new EventEmitter();
+    
     requireComment = false;
     comment = '';
     displayedColumns = ['avatar', 'id', 'name', 'p1', 'p2', 'department', 'assignment', 'buttons'];
@@ -24,6 +28,10 @@ export class RecommendationComponent implements OnInit {
             const clone = Object.assign({}, patient);
             this.originalData.push(clone);
         }
+    }
+
+    getPatientName(patient: IPatientStatus): string {
+        return `חולה מס ${patient.id}`;
     }
 
     getPatientAssistedStatus(patient: IPatientStatus): string {
@@ -47,13 +55,19 @@ export class RecommendationComponent implements OnInit {
     }
 
     getWaitingTimeFormat(patient: IPatientStatus): string {
-        const ms = patient.totalTimeInMelrad * 60 * 1000;
-        const hours = Math.floor(patient.totalTimeInMelrad / 60);
-        const minutes = patient.totalTimeInMelrad - (hours * 60);
+        
+        const hours = Math.floor(patient.totalTimeInMelrad);
+        const minutes = Math.floor((patient.totalTimeInMelrad - hours) * 60);
         
         const strHours = hours.toString().padStart(2, '0');
         const strMinutes = minutes.toString().padStart(2, '0');
         return `${strHours}:${strMinutes}`;
+    }
+
+    getWaitingTimeColor(patient: IPatientStatus): string {
+        if (patient.totalTimeInMelrad > 12) return 'orange';
+        if (patient.totalTimeInMelrad > 24) return 'red';
+        return 'green';
     }
 
     onAssignmentChange(data: MatSelectChange, patient: IPatientStatus) {
@@ -64,11 +78,11 @@ export class RecommendationComponent implements OnInit {
     }
 
     onApprove() {
-
+        this.approve.emit();
     }
 
     onReject() {
-        
+        this.reject.emit();
     }
 
     onReset(event: any, patient: IPatientStatus) {
