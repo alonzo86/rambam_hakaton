@@ -38,12 +38,12 @@
 
             <ng-container matColumnDef="gender">
                 <mat-header-cell *matHeaderCellDef >מגדר</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.gender}}</mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.gender === 'female' ? 'נקבה' : 'זכר'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="previousReleasingDepartment">
                 <mat-header-cell *matHeaderCellDef>מחלקה משחררת באשפוז הקודם</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.previousReleasingDepartment}}</mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.previousReleasingDepartment === 'A' ? 'פנימית א' : row.previousReleasingDepartment === 'B' ? 'פנימית ב' :  row.previousReleasingDepartment === 'C' ? 'פנימית ג' : row.previousReleasingDepartment === 'D' ? 'פנימית ד' : row.previousReleasingDepartment === 'E' ? 'פנימית ה' : row.previousReleasingDepartment === 'H' ? 'פנימית ח' : ''}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="totalTimeInMelrad">
                 <mat-header-cell *matHeaderCellDef>סה"כ זמן שהיה במלרד (שעות)</mat-header-cell>
@@ -85,7 +85,7 @@
 
             <ng-container matColumnDef="department">
                 <mat-header-cell *matHeaderCellDef>שיבוץ</mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{row.department}}</mat-cell>
+                <mat-cell *matCellDef="let row"> {{row.department === 'A' ? 'פנימית א' : row.department === 'B' ? 'פנימית ב' :  row.department === 'C' ? 'פנימית ג' : row.department === 'D' ? 'פנימית ד' : row.department === 'E' ? 'פנימית ה' : row.department === 'H' ? 'פנימית ח' : ''}}</mat-cell>
             </ng-container>
 
             <!-- Modified Column -->

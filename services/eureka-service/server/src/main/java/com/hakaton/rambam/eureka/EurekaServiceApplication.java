@@ -1,4 +1,4 @@
-package com.ayc.smartik.eureka;
+package com.hakaton.rambam.eureka;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

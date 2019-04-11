@@ -8,6 +8,7 @@ import {SelectionModel} from "@angular/cdk/typings/esm5/collections";
 import {MatDialog, MatDialogConfig} from "@angular/material";
 import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 
+
 @Component({
     selector   : 'patients',
     templateUrl: './patients.component.html',
@@ -16,7 +17,7 @@ import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 })
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
-    allSelected:boolean;
+    allSelected: boolean;
     currSelected:Array<IPatientStatus> = [];
 
 
@@ -27,7 +28,7 @@ export class PatientsComponent implements OnInit {
         'medicalComplexityMonitor', 'medicalComplexityOxygen',
         'isolationType', 'neutropeticPatient'];
 
-    constructor(private patientsStatusService: PatientsStatusService,private dialog:MatDialog) {
+    constructor(private patientsStatusService: PatientsStatusService, private dialog: MatDialog) {
         this.allSelected = false;
     }
 
@@ -54,23 +55,24 @@ export class PatientsComponent implements OnInit {
         }
         return row.selected = cg.checked;
     }
-    openDialog() {
-        const dialogConfig = new MatDialogConfig();
 
+    openDialog(): void {
+        const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
-
         dialogConfig.data = {
             patients:this.currSelected
         };
-
+        dialogConfig.width = '80em';
+        dialogConfig.height = '40em';
         const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
         });
     }
-    selectAll(patients) {
+
+    selectAll(patients): void {
         this.allSelected = !this.allSelected;
         for (let patient of patients) {
             patient.selected = this.allSelected;
