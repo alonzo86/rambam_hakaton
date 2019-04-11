@@ -63,7 +63,7 @@ $custom_palettes: (
 
 // Angular Material typography
 $typography: mat-typography-config(
-    $font-family: 'Muli, Helvetica Neue, Arial, sans-serif',
+    $font-family: 'Muli, Heebo, Helvetica Neue, Arial, sans-serif',
     $title: mat-typography-level(20px, 32px, 600),
     $body-2: mat-typography-level(14px, 24px, 600),
     $button: mat-typography-level(14px, 14px, 600),
@@ -227,4 +227,14 @@ body.theme-pink-dark {
     );
 
     @include fuse-color-classes($palettes);
+}
+
+.results-form-dialog .mat-dialog-container {
+    padding:0;
+}
+
+.results-form-dialog .dialog-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }

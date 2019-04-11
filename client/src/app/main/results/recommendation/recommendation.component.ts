@@ -11,7 +11,7 @@ export class RecommendationComponent implements OnInit {
     @Input() patients: IPatientStatus[];
     requireComment = false;
     comment = '';
-    displayedColumns = ['avatar', 'id', 'name', 'p1', 'p2', 'department', 'assignment'];
+    displayedColumns = ['avatar', 'id', 'name', 'p1', 'p2', 'department', 'assignment', 'buttons'];
 
     private originalData: IPatientStatus[];
     constructor() { }
@@ -27,7 +27,6 @@ export class RecommendationComponent implements OnInit {
     }
 
     getPatientAssistedStatus(patient: IPatientStatus): string {
-        console.log('RecommendationComponent - getPatientAssistedStatus', patient);
         if (patient.nursingComplexityNursedPatient) {
             return 'סיעודי';
         }
@@ -36,7 +35,7 @@ export class RecommendationComponent implements OnInit {
     }
 
     getPatientAvatar(patient: IPatientStatus): string {
-        return patient.gender === 'F' ? 'assets/images/avatars/alice.jpg' : 'assets/images/avatars/andrew.jpg';
+        return patient.gender === 'F' ? 'assets/images/avatars/profile_f.png' : 'assets/images/avatars/profile.jpg';
     }
 
     getCurrentDepartmentName(patient: IPatientStatus): string {
@@ -70,6 +69,14 @@ export class RecommendationComponent implements OnInit {
 
     onReject() {
         
+    }
+
+    onReset(event: any, patient: IPatientStatus) {
+        event.stopPropagation();
+
+        const originalPatient = this.getOriginalPatient(patient);
+        patient.assignment = originalPatient.assignment;
+        this.requireComment = this.calculateNeedComment();
     }
 
     private calculateNeedComment(): boolean {

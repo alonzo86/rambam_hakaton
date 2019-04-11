@@ -68,7 +68,8 @@ export class PatientsComponent implements OnInit {
                 selectedPatients: this.dataSource.data.filter(p => p.selected)
             };
             dialogConfig.width = '90em';
-            dialogConfig.height = '55em';
+            dialogConfig.height = '58em';
+            dialogConfig.panelClass  = 'results-form-dialog';
             const dialogRef = this.dialog.open(ResultsDialogComponent, dialogConfig);
 
             dialogRef.afterClosed().subscribe(result => {

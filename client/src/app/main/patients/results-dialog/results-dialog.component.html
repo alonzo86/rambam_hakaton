@@ -1,4 +1,14 @@
-<h1 mat-dialog-title>שיבוץ מחלקה</h1>
-<mat-dialog-content>
-    <results [showHeader]="false" [allPatients]="allPatients" [selectedPatients]="selectedPatients" [departments]="departments"></results>
-</mat-dialog-content>
+<div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">שיבוץ מחלקה</span>
+            <button mat-icon-button  aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-dialog-content>
+        <results [showHeader]="false" [allPatients]="allPatients" [selectedPatients]="selectedPatients" [departments]="departments"></results>
+    </mat-dialog-content>
+</div>

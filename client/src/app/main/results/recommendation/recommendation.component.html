@@ -3,8 +3,8 @@
 
         <!-- Avatar Column -->
         <ng-container matColumnDef="avatar">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let patient">
+            <mat-header-cell *matHeaderCellDef fxFlex="100px"></mat-header-cell>
+            <mat-cell *matCellDef="let patient" fxFlex="100px">
                 <img class="avatar" [alt]="patient.name" [src]="getPatientAvatar(patient)" />
             </mat-cell>
         </ng-container>
@@ -55,8 +55,8 @@
 
         <!-- Company Column -->
         <ng-container matColumnDef="assignment">
-            <mat-header-cell *matHeaderCellDef>המלצה</mat-header-cell>
-            <mat-cell *matCellDef="let patient">
+            <mat-header-cell *matHeaderCellDef fxFlex="70px">המלצה</mat-header-cell>
+            <mat-cell *matCellDef="let patient" fxFlex="70px">
                 <mat-select [(value)]="patient.assigndDepartment" (selectionChange)="onAssignmentChange($event, patient)">
                     <mat-option>ללא שיבוץ</mat-option>
                     <mat-option value="A">א</mat-option>
@@ -65,6 +65,18 @@
                     <mat-option value="D">ד</mat-option>
                     <mat-option value="H">ח</mat-option>
                 </mat-select>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="buttons">
+            <mat-header-cell *matHeaderCellDef fxFlex="80px"></mat-header-cell>
+            <mat-cell *matCellDef="let patient" fxFlex="80px">
+                <div fxFlex="row" fxLayoutAlign="end">
+                    <button mat-icon-button (click)="onReset($event, patient)">
+                        <mat-icon class="secondary-text">history</mat-icon>
+                    </button>
+                </div>
+
             </mat-cell>
         </ng-container>
 
@@ -84,7 +96,7 @@
 
 <div class="p-24 m-24" fxLayout="row" fxLayoutAlign="end">
     <button mat-raised-button
-        class="mat-primary recommend-dialog-button"
+        class="mat-primary-300 recommend-dialog-button"
         (click)="onReject()"
         aria-label="ביטול"> ביטול
     </button>
