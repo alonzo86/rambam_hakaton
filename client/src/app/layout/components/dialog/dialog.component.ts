@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {MatDialog} from "@angular/material";
+import {Component, Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from "@angular/material";
 
 
 @Component({
@@ -12,8 +12,9 @@ export class DialogComponent
     /**
      * Constructor
      */
-    constructor()
+    constructor(@Inject(MAT_DIALOG_DATA) data)
     {
+        console.log(data);
     }
 
 }

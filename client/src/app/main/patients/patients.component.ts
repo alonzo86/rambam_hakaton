@@ -5,7 +5,7 @@ import {IPatientStatus} from '../sample/sample.model';
 import {PatientsStatusService} from './patients.service';
 import {map} from "rxjs/operators";
 import {SelectionModel} from "@angular/cdk/typings/esm5/collections";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatDialogConfig} from "@angular/material";
 import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 
 @Component({
@@ -17,6 +17,7 @@ import {DialogComponent} from "../../layout/components/dialog/dialog.component";
 export class PatientsComponent implements OnInit {
     @Input() unitId: string;
     allSelected:boolean;
+    currSelected:Array<IPatientStatus> = [];
 
 
     public patients$: Observable<IPatientStatus[]>;
@@ -44,14 +45,26 @@ export class PatientsComponent implements OnInit {
 
     changeSelection(cg: any , row): boolean {
         this.allSelected = false;
+        if(cg.checked) {
+            this.currSelected.push(row);
+        }else {
+            this.currSelected.forEach( (item, index) => {
+                if(item === row) this.currSelected.splice(index,1);
+            });
+        }
         return row.selected = cg.checked;
     }
     openDialog() {
-        const dialogRef = this.dialog.open(DialogComponent, {
-            data: {
-                patients: []
-            }
-        });
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            patients:this.currSelected
+        };
+
+        const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog result: ${result}`);
@@ -62,10 +75,11 @@ export class PatientsComponent implements OnInit {
         for (let patient of patients) {
             patient.selected = this.allSelected;
         }
-
-
-
-
+        if(this.allSelected){
+            this.currSelected = patients;
+        } else {
+            this.currSelected = [];
+        }
     }
 }
 
