@@ -75,7 +75,7 @@ export class RecommendationComponent implements OnInit {
         event.stopPropagation();
 
         const originalPatient = this.getOriginalPatient(patient);
-        patient.assignment = originalPatient.assignment;
+        patient.assigndDepartment = originalPatient.assigndDepartment;
         this.requireComment = this.calculateNeedComment();
     }
 
